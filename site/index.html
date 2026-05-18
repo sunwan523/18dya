@@ -142,6 +142,34 @@ body {
 }
 .topic-body ul { padding-left: 18px; margin: 4px 0; }
 .topic-body li { margin-bottom: 4px; }
+.topic-card.marked {
+  border-left: 3px solid #22c55e;
+}
+.topic-card.marked .topic-body {
+  display: none;
+}
+.topic-card.marked .topic-title::after {
+  content: ' (已掌握，点击展开)';
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: normal;
+}
+.mark-btn {
+  float: right;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.mark-btn:hover { background: #fef3c7; border-color: #f59e0b; }
+.mark-btn.marked { background: #dcfce7; border-color: #22c55e; }
 .toc-overlay {
   display: none;
   position: fixed; inset: 0; z-index: 2000;
@@ -500,6 +528,38 @@ let ttsSentences = [];
 let ttsIndex = -1;
 let ttsTimer = null;
 
+let markedTopics = {};
+
+function loadMarkedTopics() {
+  const saved = localStorage.getItem('markedTopics');
+  if (saved) {
+    try {
+      markedTopics = JSON.parse(saved);
+    } catch(e) {}
+  }
+}
+
+function saveMarkedTopics() {
+  localStorage.setItem('markedTopics', JSON.stringify(markedTopics));
+}
+
+function toggleMark(si, ti) {
+  const key = `${si}-${ti}`;
+  markedTopics[key] = !markedTopics[key];
+  saveMarkedTopics();
+  const card = document.getElementById(`card-${si}-${ti}`);
+  const btn = document.getElementById(`mark-btn-${si}-${ti}`);
+  if (markedTopics[key]) {
+    card.classList.add('marked');
+    btn.classList.add('marked');
+    btn.innerHTML = '✓';
+  } else {
+    card.classList.remove('marked');
+    btn.classList.remove('marked');
+    btn.innerHTML = '☆';
+  }
+}
+
 function render() {
   const main = document.getElementById('mainContent');
   main.innerHTML = '';
@@ -528,12 +588,24 @@ function render() {
       const card = document.createElement('div');
       card.className = 'topic-card';
       card.id = `card-${si}-${ti}`;
+      const isMarked = markedTopics[`${si}-${ti}`];
+      if (isMarked) card.classList.add('marked');
 
       const titleDiv = document.createElement('div');
       titleDiv.className = 'topic-title';
       const pri = topic.priority === 'high' ? 'priority-high' : 'priority-mid';
       const priLabel = topic.priority === 'high' ? '★ 必考' : '📌 常考';
       titleDiv.innerHTML = `${topic.title} <span class="priority ${pri}">${priLabel}</span>`;
+      
+      const markBtn = document.createElement('button');
+      markBtn.className = 'mark-btn';
+      markBtn.id = `mark-btn-${si}-${ti}`;
+      markBtn.innerHTML = isMarked ? '✓' : '☆';
+      if (isMarked) markBtn.classList.add('marked');
+      markBtn.title = '标记已掌握，下次自动隐藏';
+      markBtn.onclick = (e) => { e.stopPropagation(); toggleMark(si, ti); };
+      titleDiv.appendChild(markBtn);
+      
       card.appendChild(titleDiv);
 
       const body = document.createElement('div');
@@ -545,6 +617,25 @@ function render() {
         body.appendChild(p);
       });
       card.appendChild(body);
+      
+      card.onclick = () => {
+        if (isMarked) {
+          card.classList.toggle('marked');
+          const btn = document.getElementById(`mark-btn-${si}-${ti}`);
+          if (!card.classList.contains('marked')) {
+            btn.innerHTML = '☆';
+            btn.classList.remove('marked');
+            delete markedTopics[`${si}-${ti}`];
+            saveMarkedTopics();
+          } else {
+            btn.innerHTML = '✓';
+            btn.classList.add('marked');
+            markedTopics[`${si}-${ti}`] = true;
+            saveMarkedTopics();
+          }
+        }
+      };
+      
       content.appendChild(card);
     });
 
@@ -802,6 +893,7 @@ window.speechSynthesis.onvoiceschanged = () => {
   document.getElementById('ttsVoiceInfo').textContent = zhVoice ? `朗读音色：${zhVoice.name}` : '';
 };
 
+loadMarkedTopics();
 render();
 loadProgress();
 updateProgressBar();

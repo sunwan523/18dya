@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中高考理科复习资料 - 知识框架</title>
+<style>
+:root {
+  --bg: #f8f9fa;
+  --card-bg: #fff;
+  --text: #1a1a2e;
+  --text-secondary: #555;
+  --primary: #4a6cf7;
+  --primary-light: #e8edfe;
+  --border: #e2e8f0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --header-bg: rgba(255,255,255,0.92);
+  --toc-bg: #fff;
+  --tag-math: #3b82f6;
+  --tag-physics: #10b981;
+  --tag-chemistry: #f59e0b;
+  --tag-biology: #ef4444;
+  --tag-english: #8b5cf6;
+  --progress-bar: #4a6cf7;
+  --tts-active: #ef4444;
+}
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --primary: #60a5fa;
+  --primary-light: #1e293b;
+  --border: #334155;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --header-bg: rgba(15,23,42,0.95);
+  --toc-bg: #1e293b;
+  --progress-bar: #60a5fa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 16px;
+  transition: background 0.3s, color 0.3s;
+}
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.3s;
+}
+.header-title {
+  font-size: 16px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 200px;
+}
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.header-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.header-btn:hover { background: var(--primary-light); color: var(--primary); }
+.header-btn.active { background: var(--tts-active); color: #fff; border-color: var(--tts-active); }
+.progress-bar-wrap {
+  position: fixed; top: 56px; left: 0; right: 0; z-index: 999;
+  height: 3px; background: var(--border);
+}
+.progress-bar-fill {
+  height: 100%; width: 0%;
+  background: var(--progress-bar);
+  transition: width 0.3s;
+}
+.main {
+  max-width: 800px; margin: 80px auto 40px; padding: 0 16px;
+}
+.subject-section {
+  margin-bottom: 28px;
+}
+.subject-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.subject-header:hover { opacity: 0.85; }
+.subject-header .icon { font-size: 22px; }
+.subject-header .title { font-size: 18px; font-weight: 700; flex: 1; }
+.subject-header .arrow { font-size: 14px; transition: transform 0.3s; color: var(--text-secondary); }
+.subject-header .arrow.open { transform: rotate(90deg); }
+.subject-header .tag {
+  font-size: 11px; padding: 2px 10px; border-radius: 20px;
+  color: #fff; font-weight: 600;
+}
+.subject-content {
+  display: none;
+  padding: 4px 0;
+}
+.subject-content.open { display: block; }
+.topic-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.topic-title {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.topic-title .priority {
+  font-size: 11px; padding: 1px 8px; border-radius: 4px;
+  font-weight: 600;
+}
+.priority-high { background: #fef2f2; color: #dc2626; }
+.priority-mid { background: #fef9c3; color: #a16207; }
+[data-theme="dark"] .priority-high { background: #450a0a; color: #fca5a5; }
+[data-theme="dark"] .priority-mid { background: #422006; color: #fde68a; }
+.topic-body { font-size: 14.5px; color: var(--text-secondary); }
+.topic-body p { margin-bottom: 6px; }
+.topic-body .highlight {
+  background: var(--primary-light);
+  padding: 1px 6px; border-radius: 3px;
+  color: var(--primary); font-weight: 600;
+}
+.topic-body ul { padding-left: 18px; margin: 4px 0; }
+.topic-body li { margin-bottom: 4px; }
+.toc-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+}
+.toc-overlay.open { display: block; }
+.toc-panel {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 2001;
+  width: 300px; max-width: 80vw;
+  background: var(--toc-bg);
+  padding: 20px;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+  border-right: 1px solid var(--border);
+}
+.toc-panel.open { transform: translateX(0); }
+.toc-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+.toc-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  margin-bottom: 4px;
+}
+.toc-item:hover { background: var(--primary-light); color: var(--primary); }
+.toc-item .dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.tts-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+.tts-bar.open { display: block; }
+.tts-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; text-align: center; }
+.tts-controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.tts-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.tts-btn:hover { background: var(--primary-light); color: var(--primary); }
+.tts-btn.play { width: 48px; height: 48px; background: var(--primary); color: #fff; border-color: var(--primary); }
+.tts-btn.play:hover { opacity: 0.85; }
+.tts-btn.play.active { background: var(--tts-active); border-color: var(--tts-active); }
+.tts-speed {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-secondary);
+}
+.tts-speed select {
+  padding: 2px 6px; border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 12px;
+}
+.tts-voice { font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: center; }
+.tts-highlight {
+  background: #fef08a !important;
+  border-radius: 2px;
+  transition: background 0.1s;
+}
+[data-theme="dark"] .tts-highlight {
+  background: #713f12 !important;
+}
+.read-progress-badge {
+  position: fixed; bottom: 80px; right: 16px; z-index: 999;
+  font-size: 11px; color: var(--text-secondary);
+  background: var(--card-bg);
+  padding: 6px 12px; border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.read-progress-badge.show { opacity: 1; }
+@media (max-width: 600px) {
+  .main { padding: 0 12px; }
+  .topic-card { padding: 14px 16px; }
+  .subject-header { padding: 12px 16px; }
+  .header-title { font-size: 14px; max-width: 140px; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-title">📚 中高考复习资料</div>
+  <div class="header-actions">
+    <button class="header-btn" onclick="toggleTOC()" title="目录">☰</button>
+    <button class="header-btn" onclick="toggleTTS()" title="语音朗读">🔊</button>
+    <button class="header-btn" onclick="toggleTheme()" title="切换主题">🌓</button>
+  </div>
+</div>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<div class="toc-overlay" id="tocOverlay" onclick="toggleTOC()"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-title">📑 目录</div>
+  <div id="tocList"></div>
+</div>
+
+<div class="main" id="mainContent"></div>
+
+<div class="tts-bar" id="ttsBar">
+  <div class="tts-info" id="ttsInfo">选择一段文字开始朗读</div>
+  <div class="tts-controls">
+    <button class="tts-btn" onclick="ttsPrev()" title="上一句">⏮</button>
+    <button class="tts-btn play" id="ttsPlayBtn" onclick="ttsToggle()" title="播放/暂停">▶</button>
+    <button class="tts-btn" onclick="ttsNext()" title="下一句">⏭</button>
+    <button class="tts-btn" onclick="ttsStop()" title="停止">⏹</button>
+    <div class="tts-speed">
+      <span>速度</span>
+      <select id="ttsSpeed" onchange="ttsUpdateSpeed()">
+        <option value="0.5">0.5x</option>
+        <option value="0.75">0.75x</option>
+        <option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+        <option value="2">2x</option>
+      </select>
+    </div>
+  </div>
+  <div class="tts-voice" id="ttsVoiceInfo"></div>
+</div>
+
+<div class="read-progress-badge" id="progressBadge">已读 0%</div>
+
+<script>
+const DATA = [
+  {
+    id: "math", title: "数学", icon: "📐", color: "#3b82f6", tag: "数学", tagColor: "var(--tag-math)",
+    topics: [
+      { title: "集合", priority: "high", items: [
+        "交集：由所有既属于集合A又属于集合B的元素所组成的集合，记作A∩B，性质：A∩B=B∩A，A∩A=A，A∩∅=∅。",
+        "并集：由所有属于集合A或属于集合B的元素所组成的集合，记作A∪B，性质：A∪B=B∪A，A∪A=A，A∪∅=A。",
+        "补集：设U为全集，A是U的一个子集，由U中所有不属于A的元素组成的集合，记作∁UA，性质：A∪∁UA=U，A∩∁UA=∅，∁U(∁UA)=A。"
+      ]},
+      { title: "区间与集合运算", priority: "mid", items: [
+        "区间表示：闭区间[a,b]（包含a和b），开区间(a,b)（不包含a和b），半开半闭区间[a,b)、 (a,b]，无穷区间[a,+∞)、(-∞,b]、(-∞,+∞)。",
+        "集合运算：交集、并集、补集的混合运算，常结合不等式求解，注意运算顺序：先补集，后交并。"
+      ]},
+      { title: "函数——定义域与值域", priority: "high", items: [
+        "定义域：分母不为0、偶次根号下非负、对数的真数大于0、零次幂的底数不为0。",
+        "值域：配方法（二次函数）、单调性法、换元法、不等式法，结合定义域求解。",
+        "单调性：定义法（∀x1<x2，f(x1)<f(x2)增，f(x1)>f(x2)减）、导数法。",
+        "奇偶性：f(-x)=f(x)偶函数（y轴对称），f(-x)=-f(x)奇函数（原点对称），奇函数f(0)=0。"
+      ]},
+      { title: "二次函数（重点）", priority: "high", items: [
+        "开口方向：a>0向上，a<0向下，|a|越大开口越窄。",
+        "顶点坐标：(-b/(2a)，(4ac-b²)/(4a))，顶点是最值点。",
+        "对称轴：x=-b/(2a)，对称轴两侧单调性相反。"
+      ]},
+      { title: "指数与对数", priority: "high", items: [
+        "指数运算：a^m·a^n=a^(m+n)，a^m÷a^n=a^(m-n)，(a^m)^n=a^(mn)，a^0=1，a^(-n)=1/a^n。",
+        "对数运算：log_a(M·N)=log_aM+log_aN，log_a(M/N)=log_aM-log_aN，log_aM^n=nlog_aM，换底公式log_ab=log_cb/log_ca。",
+        "图像：指数函数y=a^x恒过(0,1)；对数函数y=log_ax恒过(1,0)；互为反函数，关于y=x对称。"
+      ]},
+      { title: "等差数列", priority: "high", items: [
+        "通项公式：a_n=a_1+(n-1)d（d为公差）。",
+        "求和公式：S_n=(n(a_1+a_n))/2=na_1+(n(n-1))/2 d。",
+        "性质：若m+n=p+q，则a_m+a_n=a_p+a_q。"
+      ]},
+      { title: "等比数列", priority: "high", items: [
+        "通项公式：a_n=a_1 q^(n-1)（q为公比，q≠0）。",
+        "求和公式：q≠1时S_n=(a_1(1-q^n))/(1-q)；q=1时S_n=na₁。",
+        "性质：若m+n=p+q，则a_m·a_n=a_p·a_q。"
+      ]},
+      { title: "概率统计", priority: "high", items: [
+        "平均数：¯x=(x₁+x₂+...+xₙ)/n。",
+        "方差：s²=1/n[(x₁-¯x)²+(x₂-¯x)²+...+(xₙ-¯x)²]，反映波动大小。",
+        "古典概型：P(A)=事件A包含的基本事件数/总基本事件数。",
+        "排列（有序）：A_n^k=n!/((n-k)!)；组合（无序）：C_n^k=n!/(k!(n-k)!)"
+      ]},
+      { title: "立体几何", priority: "high", items: [
+        "线线关系：共面（平行、相交）和异面。",
+        "线面平行：平面外一条直线与平面内一条直线平行。",
+        "线面垂直：一条直线与平面内两条相交直线都垂直。",
+        "体积：柱体V=Sh，锥体V=Sh/3，球体V=4πr³/3。"
+      ]},
+      { title: "三角函数", priority: "high", items: [
+        "核心恒等式：sin²x+cos²x=1，tanx=sinx/cosx。",
+        "sinx、cosx值域[-1,1]，周期2π；tanx值域R，周期π。",
+        "特殊值：sin30°=1/2，sin45°=√2/2，sin60°=√3/2；cos30°=√3/2，cos45°=√2/2，cos60°=1/2。"
+      ]},
+      { title: "导数基础", priority: "mid", items: [
+        "求单调性：f'(x)>0递增，f'(x)<0递减，f'(x)=0极值点。",
+        "核心公式：(xⁿ)'=nxⁿ⁻¹，(sinx)'=cosx，(cosx)'=-sinx，(lnx)'=1/x，(eˣ)'=eˣ。"
+      ]}
+    ]
+  },
+  {
+    id: "physics", title: "物理", icon: "⚛️", color: "#10b981", tag: "物理", tagColor: "var(--tag-physics)",
+    topics: [
+      { title: "运动学核心公式", priority: "high", items: [
+        "v=v₀+at（速度公式，v末速度，v₀初速度，a加速度，t时间）",
+        "s=v₀t+½at²（位移公式）",
+        "v²-v₀²=2as（速度-位移公式，高频考点）",
+        "加速度：a=(v-v₀)/t，方向与速度变化量方向一致。"
+      ]},
+      { title: "牛顿定律", priority: "high", items: [
+        "F=ma（牛顿第二定律，a与F成正比，与m成反比）",
+        "受力分析顺序：先重力→后弹力→再摩擦力→其他力。",
+        "重力：G=mg（g≈9.8m/s²，方向竖直向下）",
+        "弹力：接触且挤压产生，垂直接触面指向受力物体。",
+        "摩擦力：静摩擦力0≤f静≤f静max；滑动摩擦力f滑=μN。"
+      ]},
+      { title: "功和能", priority: "high", items: [
+        "功：W=Fs（力和距离在同一直线，J）",
+        "动能：E_k=½mv²（速度越大动能越大）",
+        "重力势能：E_p=mgh（h相对参考平面高度）",
+        "能量守恒：只有重力、弹力做功时机械能守恒。"
+      ]},
+      { title: "电学", priority: "high", items: [
+        "欧姆定律：I=U/R（纯电阻电路适用）",
+        "串联：I=I₁=I₂=...，U=U₁+U₂+...，R=R₁+R₂+...",
+        "并联：U=U₁=U₂=...，I=I₁+I₂+...，1/R=1/R₁+1/R₂+...",
+        "电功率：P=UI（普适），P=I²R、P=U²/R（纯电阻电路）"
+      ]}
+    ]
+  },
+  {
+    id: "chemistry", title: "化学", icon: "🧪", color: "#f59e0b", tag: "化学", tagColor: "var(--tag-chemistry)",
+    topics: [
+      { title: "化学方程式", priority: "high", items: [
+        "配平：质量守恒定律（原子种类、数目、质量不变）",
+        "条件：点燃、加热、高温、催化剂、通电等必须标注。",
+        "沉淀↓：生成不溶于水的物质标注↓。",
+        "气体↑：生成气体标注↑。",
+        "高频方程式：2H₂O₂→2H₂O+O₂↑，CaCO₃+2HCl→CaCl₂+H₂O+CO₂↑，C+O₂→CO₂，NaOH+HCl→NaCl+H₂O"
+      ]},
+      { title: "氧化还原", priority: "high", items: [
+        "化合价变化本质：电子转移（得失或偏移）。",
+        "口诀：升失氧（化合价升高→失电子→被氧化→还原剂）；降得还（化合价降低→得电子→被还原→氧化剂）。"
+      ]},
+      { title: "离子反应", priority: "high", items: [
+        "强酸（完全电离）：HCl、H₂SO₄、HNO₃。",
+        "强碱（完全电离）：NaOH、KOH、Ba(OH)₂。",
+        "离子共存：不生成沉淀、气体、水或难电离物质可共存。"
+      ]},
+      { title: "元素周期律", priority: "high", items: [
+        "同周期左→右：金属性减弱，非金属性增强，原子半径减小。",
+        "同主族上→下：金属性增强，非金属性减弱，原子半径增大。"
+      ]},
+      { title: "化学实验", priority: "high", items: [
+        "气体制备：O₂（H₂O₂+MnO₂或KMnO₄加热），CO₂（CaCO₃+稀盐酸）。",
+        "过滤：一贴二低三靠。",
+        "蒸发：玻璃棒搅拌，接近蒸干停止加热。",
+        "滴定：酸碱中和滴定，酚酞（酸无色碱变红）、石蕊（酸红碱蓝）。"
+      ]},
+      { title: "有机化学基础", priority: "high", items: [
+        "甲烷CH₄：正四面体，性质稳定。",
+        "乙烯C₂H₄：含C=C双键，能加成反应。",
+        "乙醇C₂H₅OH：含羟基-OH，俗称酒精。",
+        "乙酸CH₃COOH：含羧基-COOH，俗称醋酸，有酸性。"
+      ]}
+    ]
+  },
+  {
+    id: "biology", title: "生物", icon: "🧬", color: "#ef4444", tag: "生物", tagColor: "var(--tag-biology)",
+    topics: [
+      { title: "细胞", priority: "high", items: [
+        "细胞膜：磷脂+蛋白质，控制物质进出（选择透过性）。",
+        "细胞核：储存和复制遗传信息，细胞控制中心。",
+        "线粒体：有氧呼吸场所，产生ATP（动力车间）。",
+        "叶绿体：光合作用场所（只存在于植物绿色细胞）。"
+      ]},
+      { title: "光合作用与呼吸作用", priority: "high", items: [
+        "光合：6CO₂+6H₂O→C₆H₁₂O₆+6O₂（叶绿体，光照）。",
+        "有氧呼吸：C₆H₁₂O₆+6O₂+6H₂O→6CO₂+12H₂O+能量（线粒体）。",
+        "无氧呼吸：产生酒精+CO₂（植物）或乳酸（动物）。"
+      ]},
+      { title: "遗传——孟德尔规律", priority: "high", items: [
+        "分离定律：等位基因分离，Aa自交→AA:Aa:aa=1:2:1，表现型3:1。",
+        "自由组合：非等位基因自由组合，AaBb自交→9:3:3:1。"
+      ]},
+      { title: "基因表达", priority: "high", items: [
+        "中心法则：DNA→RNA→蛋白质。",
+        "转录：DNA→mRNA（细胞核，碱基互补配对）。",
+        "翻译：mRNA→蛋白质（核糖体，tRNA转运氨基酸）。"
+      ]},
+      { title: "稳态与调节", priority: "high", items: [
+        "内环境：血浆、组织液、淋巴（细胞直接生活的环境）。",
+        "调节机制：神经-体液-免疫调节网络。",
+        "血糖调节：胰岛素降血糖，胰高血糖素升血糖。",
+        "体温调节：37℃左右，神经调节血管、骨骼肌、汗腺。"
+      ]},
+      { title: "生态系统", priority: "high", items: [
+        "组成：生产者（绿色植物）、消费者（动物）、分解者（细菌真菌）+非生物。",
+        "能量流动：单向流动、逐级递减，效率10%-20%。",
+        "物质循环：以碳循环为核心（光合吸收CO₂，呼吸释放CO₂）。"
+      ]}
+    ]
+  },
+  {
+    id: "english", title: "英语", icon: "🇬🇧", color: "#8b5cf6", tag: "英语", tagColor: "var(--tag-english)",
+    topics: [
+      { title: "高频词汇策略", priority: "high", items: [
+        "动词：核心谓语动词+固定搭配（take care of、make a decision）。",
+        "连接词：转折、因果、递进、并列、让步，直接影响逻辑。",
+        "每天背50词，按艾宾浩斯遗忘曲线复习旧词。"
+      ]},
+      { title: "核心时态", priority: "high", items: [
+        "一般现在时：经常性动作/客观事实，动词原形/三单。",
+        "一般过去时：过去发生的动作，动词过去式。",
+        "现在完成时：过去动作对现在的影响，have/has+过去分词。"
+      ]},
+      { title: "从句", priority: "high", items: [
+        "定语从句：修饰名词，关系词who/which/that等。",
+        "名词性从句：主语/宾语/表语/同位语从句。",
+        "状语从句：时间/when、条件/if、原因/because等。"
+      ]},
+      { title: "非谓语动词", priority: "high", items: [
+        "to do：将要做、目的（want to do）。",
+        "doing：主动、进行（like reading）。",
+        "done：被动、完成（broken cup）。"
+      ]},
+      { title: "阅读理解技巧", priority: "high", items: [
+        "定位词：人名、地名、时间、数字快速定位。",
+        "同义替换：正确答案=原文同义改写。",
+        "排除法：排除与原文矛盾、偷换概念、无中生有的选项。",
+        "主旨题看首尾段，细节题定位原文，推断题基于原文。"
+      ]},
+      { title: "完形填空", priority: "high", items: [
+        "逻辑关系：转折/因果/递进判断答案。",
+        "固定搭配：平时积累（take place、be good at）。",
+        "语境：结合上下文，不孤立看空格。"
+      ]},
+      { title: "作文模板", priority: "high", items: [
+        "建议信：I suggest that... / It is a good idea to...",
+        "通知：标题Notice，说明时间地点事件。",
+        "邀请信：I am writing to invite you to...",
+        "观点文：In my opinion... / As far as I am concerned..."
+      ]}
+    ]
+  }
+];
+
+let currentSubject = null;
+let ttsActive = false;
+let ttsPaused = false;
+let ttsUtterance = null;
+let ttsSentences = [];
+let ttsIndex = -1;
+let ttsTimer = null;
+
+function render() {
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '';
+  DATA.forEach((subject, si) => {
+    const section = document.createElement('div');
+    section.className = 'subject-section';
+    section.dataset.subject = subject.id;
+
+    const header = document.createElement('div');
+    header.className = 'subject-header';
+    header.style.borderLeft = `4px solid ${subject.color}`;
+    header.innerHTML = `
+      <span class="icon">${subject.icon}</span>
+      <span class="title">${subject.title}</span>
+      <span class="tag" style="background:${subject.tagColor}">${subject.tag}</span>
+      <span class="arrow">▶</span>
+    `;
+    header.onclick = () => toggleSubject(si);
+    section.appendChild(header);
+
+    const content = document.createElement('div');
+    content.className = 'subject-content';
+    content.id = `subject-${si}`;
+
+    subject.topics.forEach((topic, ti) => {
+      const card = document.createElement('div');
+      card.className = 'topic-card';
+      card.id = `card-${si}-${ti}`;
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'topic-title';
+      const pri = topic.priority === 'high' ? 'priority-high' : 'priority-mid';
+      const priLabel = topic.priority === 'high' ? '★ 必考' : '📌 常考';
+      titleDiv.innerHTML = `${topic.title} <span class="priority ${pri}">${priLabel}</span>`;
+      card.appendChild(titleDiv);
+
+      const body = document.createElement('div');
+      body.className = 'topic-body';
+      topic.items.forEach(item => {
+        const p = document.createElement('p');
+        p.textContent = item;
+        p.dataset.tts = item;
+        body.appendChild(p);
+      });
+      card.appendChild(body);
+      content.appendChild(card);
+    });
+
+    section.appendChild(content);
+    main.appendChild(section);
+  });
+
+  renderTOC();
+}
+
+function renderTOC() {
+  const list = document.getElementById('tocList');
+  list.innerHTML = '';
+  DATA.forEach((subject, si) => {
+    const item = document.createElement('div');
+    item.className = 'toc-item';
+    item.innerHTML = `<span class="dot" style="background:${subject.color}"></span><span>${subject.icon} ${subject.title}</span>`;
+    item.onclick = () => {
+      toggleTOC();
+      scrollToSubject(si);
+    };
+    list.appendChild(item);
+  });
+}
+
+function scrollToSubject(si) {
+  const header = document.querySelectorAll('.subject-header')[si];
+  if (header) {
+    if (!document.getElementById(`subject-${si}`).classList.contains('open')) {
+      toggleSubject(si);
+    }
+    header.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function toggleSubject(si) {
+  const content = document.getElementById(`subject-${si}`);
+  const arrow = content.parentElement.querySelector('.arrow');
+  const isOpen = content.classList.toggle('open');
+  arrow.classList.toggle('open', isOpen);
+  if (isOpen && currentSubject === null) currentSubject = si;
+  saveProgress();
+}
+
+function toggleTOC() {
+  document.getElementById('tocOverlay').classList.toggle('open');
+  document.getElementById('tocPanel').classList.toggle('open');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+function saveProgress() {
+  const state = { scrollY: window.scrollY, subjects: {} };
+  DATA.forEach((_, si) => {
+    state.subjects[si] = document.getElementById(`subject-${si}`).classList.contains('open');
+  });
+  state.theme = document.documentElement.getAttribute('data-theme');
+  localStorage.setItem('readerProgress', JSON.stringify(state));
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem('readerProgress');
+  if (!saved) return;
+  try {
+    const state = JSON.parse(saved);
+    if (state.theme) document.documentElement.setAttribute('data-theme', state.theme);
+    DATA.forEach((_, si) => {
+      if (state.subjects && state.subjects[si]) {
+        const content = document.getElementById(`subject-${si}`);
+        if (content) {
+          content.classList.add('open');
+          const arrow = content.parentElement.querySelector('.arrow');
+          if (arrow) arrow.classList.add('open');
+        }
+      }
+    });
+    setTimeout(() => { window.scrollTo(0, state.scrollY || 0); }, 100);
+  } catch(e) {}
+}
+
+function updateProgressBar() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+  document.getElementById('progressFill').style.width = progress + '%';
+  const badge = document.getElementById('progressBadge');
+  badge.textContent = `已读 ${progress}%`;
+  badge.classList.toggle('show', progress > 0 && progress < 100);
+  if (progress >= 100) badge.classList.remove('show');
+}
+
+// TTS Functions
+function toggleTTS() {
+  const bar = document.getElementById('ttsBar');
+  bar.classList.toggle('open');
+  if (bar.classList.contains('open')) {
+    initTTS();
+  } else {
+    ttsStop();
+  }
+}
+
+function initTTS() {
+  if (!window.speechSynthesis) {
+    document.getElementById('ttsInfo').textContent = '⚠️ 您的浏览器不支持语音朗读';
+    return;
+  }
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+  document.getElementById('ttsVoiceInfo').textContent = zhVoice ? `朗读音色：${zhVoice.name}` : '';
+  collectSentences();
+}
+
+function collectSentences() {
+  ttsSentences = [];
+  document.querySelectorAll('.topic-body p').forEach(p => {
+    const text = p.textContent.trim();
+    if (text) ttsSentences.push({ text, element: p });
+  });
+  document.querySelectorAll('.topic-body li').forEach(li => {
+    const text = li.textContent.trim();
+    if (text) ttsSentences.push({ text, element: li });
+  });
+}
+
+function ttsToggle() {
+  if (ttsActive && !ttsPaused) {
+    ttsPause();
+  } else if (ttsActive && ttsPaused) {
+    ttsResume();
+  } else {
+    ttsPlay();
+  }
+}
+
+function ttsPlay() {
+  if (ttsSentences.length === 0) {
+    collectSentences();
+    if (ttsSentences.length === 0) return;
+  }
+  ttsIndex = 0;
+  ttsActive = true;
+  ttsPaused = false;
+  document.getElementById('ttsPlayBtn').textContent = '⏸';
+  document.getElementById('ttsPlayBtn').classList.add('active');
+  document.getElementById('ttsInfo').textContent = '朗读中...';
+  speakCurrent();
+}
+
+function ttsPause() {
+  ttsPaused = true;
+  window.speechSynthesis.pause();
+  document.getElementById('ttsPlayBtn').textContent = '▶';
+  document.getElementById('ttsPlayBtn').classList.remove('active');
+  document.getElementById('ttsInfo').textContent = '已暂停';
+}
+
+function ttsResume() {
+  ttsPaused = false;
+  window.speechSynthesis.resume();
+  document.getElementById('ttsPlayBtn').textContent = '⏸';
+  document.getElementById('ttsPlayBtn').classList.add('active');
+  document.getElementById('ttsInfo').textContent = '朗读中...';
+}
+
+function ttsStop() {
+  ttsActive = false;
+  ttsPaused = false;
+  ttsIndex = -1;
+  window.speechSynthesis.cancel();
+  document.getElementById('ttsPlayBtn').textContent = '▶';
+  document.getElementById('ttsPlayBtn').classList.remove('active');
+  document.getElementById('ttsInfo').textContent = '已停止';
+  clearHighlight();
+  if (ttsTimer) { clearTimeout(ttsTimer); ttsTimer = null; }
+}
+
+function ttsPrev() {
+  if (ttsIndex > 0) {
+    ttsIndex--;
+    window.speechSynthesis.cancel();
+    speakCurrent();
+  }
+}
+
+function ttsNext() {
+  if (ttsIndex < ttsSentences.length - 1) {
+    ttsIndex++;
+    window.speechSynthesis.cancel();
+    speakCurrent();
+  } else {
+    ttsStop();
+    document.getElementById('ttsInfo').textContent = '✅ 朗读完毕';
+  }
+}
+
+function ttsUpdateSpeed() {
+  // speed will apply on next utterance
+}
+
+function speakCurrent() {
+  if (ttsIndex < 0 || ttsIndex >= ttsSentences.length) {
+    ttsStop();
+    if (ttsIndex >= ttsSentences.length) document.getElementById('ttsInfo').textContent = '✅ 朗读完毕';
+    return;
+  }
+  clearHighlight();
+  const item = ttsSentences[ttsIndex];
+  if (item.element) item.element.classList.add('tts-highlight');
+  item.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const utterance = new SpeechSynthesisUtterance(item.text);
+  utterance.lang = 'zh-CN';
+  utterance.rate = parseFloat(document.getElementById('ttsSpeed').value);
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+  if (zhVoice) utterance.voice = zhVoice;
+
+  utterance.onend = () => {
+    if (ttsActive && !ttsPaused) {
+      ttsTimer = setTimeout(() => {
+        ttsIndex++;
+        speakCurrent();
+      }, 300);
+    }
+  };
+  utterance.onerror = () => {
+    if (ttsActive) {
+      ttsIndex++;
+      speakCurrent();
+    }
+  };
+  window.speechSynthesis.speak(utterance);
+  document.getElementById('ttsInfo').textContent = `朗读进度：${ttsIndex + 1}/${ttsSentences.length}`;
+}
+
+function clearHighlight() {
+  document.querySelectorAll('.tts-highlight').forEach(el => el.classList.remove('tts-highlight'));
+}
+
+window.addEventListener('scroll', () => {
+  updateProgressBar();
+  clearTimeout(window._saveTimer);
+  window._saveTimer = setTimeout(saveProgress, 500);
+});
+
+window.speechSynthesis.onvoiceschanged = () => {
+  const voices = window.speechSynthesis.getVoices();
+  const zhVoice = voices.find(v => v.lang.startsWith('zh'));
+  document.getElementById('ttsVoiceInfo').textContent = zhVoice ? `朗读音色：${zhVoice.name}` : '';
+};
+
+render();
+loadProgress();
+updateProgressBar();
+</script>
+</body>
+</html>

@@ -2,27 +2,27 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>高考复习资料</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中高考理科复习资料 - 知识框架</title>
 <style>
 :root {
-  --bg: #f0f4f8;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-secondary: #475569;
-  --primary: #2563eb;
-  --primary-light: #dbeafe;
+  --bg: #f8f9fa;
+  --card-bg: #fff;
+  --text: #1a1a2e;
+  --text-secondary: #555;
+  --primary: #4a6cf7;
+  --primary-light: #e8edfe;
   --border: #e2e8f0;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08);
-  --header-bg: rgba(255,255,255,0.96);
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --header-bg: rgba(255,255,255,0.92);
   --toc-bg: #fff;
-  --tag-math: #2563eb;
-  --tag-physics: #059669;
-  --tag-chemistry: #d97706;
-  --tag-biology: #dc2626;
-  --tag-english: #7c3aed;
-  --progress-bar: #2563eb;
-  --tts-active: #dc2626;
+  --tag-math: #3b82f6;
+  --tag-physics: #10b981;
+  --tag-chemistry: #f59e0b;
+  --tag-biology: #ef4444;
+  --tag-english: #8b5cf6;
+  --progress-bar: #4a6cf7;
+  --tts-active: #ef4444;
 }
 [data-theme="dark"] {
   --bg: #0f172a;
@@ -32,8 +32,8 @@
   --primary: #60a5fa;
   --primary-light: #1e293b;
   --border: #334155;
-  --shadow: 0 1px 3px rgba(0,0,0,0.3);
-  --header-bg: rgba(15,23,42,0.96);
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --header-bg: rgba(15,23,42,0.95);
   --toc-bg: #1e293b;
   --progress-bar: #60a5fa;
 }
@@ -42,41 +42,40 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.85;
+  line-height: 1.8;
   font-size: 16px;
   transition: background 0.3s, color 0.3s;
-  -webkit-font-smoothing: antialiased;
 }
 .header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: var(--header-bg);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 0 16px;
-  height: 60px;
+  padding: 0 20px;
+  height: 56px;
   display: flex; align-items: center; justify-content: space-between;
   transition: background 0.3s;
 }
 .header-title {
-  font-size: 15px; font-weight: 700;
+  font-size: 16px; font-weight: 700;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 200px;
 }
 .header-actions { display: flex; align-items: center; gap: 8px; }
 .header-btn {
-  width: 40px; height: 40px; border-radius: 10px;
+  width: 36px; height: 36px; border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.2s;
 }
 .header-btn:hover { background: var(--primary-light); color: var(--primary); }
 .header-btn.active { background: var(--tts-active); color: #fff; border-color: var(--tts-active); }
 .progress-bar-wrap {
-  position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
+  position: fixed; top: 56px; left: 0; right: 0; z-index: 999;
   height: 3px; background: var(--border);
 }
 .progress-bar-fill {
@@ -84,117 +83,105 @@ body {
   background: var(--progress-bar);
   transition: width 0.3s;
 }
-.countdown-banner {
-  margin-top: 63px;
-  padding: 16px;
-  background: linear-gradient(135deg, var(--primary), #7c3aed);
-  color: white;
-  text-align: center;
-}
-.countdown-text { font-size: 15px; font-weight: 600; }
-.countdown-days {
-  font-size: 42px; font-weight: 800;
-  display: block;
-  line-height: 1.2;
-  margin: 4px 0;
-}
 .main {
-  max-width: 100%; margin: 0 auto; padding: 16px 16px 100px;
+  max-width: 800px; margin: 80px auto 40px; padding: 0 16px;
 }
 .subject-section {
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 .subject-header {
-  display: flex; align-items: center; gap: 12px;
-  padding: 16px 18px;
-  border-radius: 16px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.2s;
   user-select: none;
-  box-shadow: var(--shadow);
-  background: var(--card-bg);
-  border: 1px solid var(--border);
 }
-.subject-header:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-.subject-header .icon { font-size: 26px; }
-.subject-header .title { font-size: 17px; font-weight: 700; flex: 1; }
-.subject-header .arrow { font-size: 16px; transition: transform 0.3s; color: var(--text-secondary); }
+.subject-header:hover { opacity: 0.85; }
+.subject-header .icon { font-size: 22px; }
+.subject-header .title { font-size: 18px; font-weight: 700; flex: 1; }
+.subject-header .arrow { font-size: 14px; transition: transform 0.3s; color: var(--text-secondary); }
 .subject-header .arrow.open { transform: rotate(90deg); }
 .subject-header .tag {
-  font-size: 12px; padding: 3px 12px; border-radius: 20px;
+  font-size: 11px; padding: 2px 10px; border-radius: 20px;
   color: #fff; font-weight: 600;
 }
 .subject-content {
   display: none;
-  padding: 12px 4px 0;
+  padding: 4px 0;
 }
 .subject-content.open { display: block; }
 .topic-card {
   background: var(--card-bg);
-  border-radius: 14px;
-  padding: 16px 16px;
+  border-radius: 12px;
+  padding: 18px 20px;
   margin-bottom: 12px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
-  transition: background 0.3s, border-color 0.3s, transform 0.25s;
+  transition: background 0.3s, border-color 0.3s;
 }
-.topic-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .topic-title {
-  font-size: 16px; font-weight: 700;
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
 }
 .topic-title .priority {
-  font-size: 11px; padding: 2px 10px; border-radius: 6px;
+  font-size: 11px; padding: 1px 8px; border-radius: 4px;
   font-weight: 600;
 }
-.priority-high { background: #fee2e2; color: #b91c1c; }
-.priority-mid { background: #fef3c7; color: #92400e; }
+.priority-high { background: #fef2f2; color: #dc2626; }
+.priority-mid { background: #fef9c3; color: #a16207; }
 [data-theme="dark"] .priority-high { background: #450a0a; color: #fca5a5; }
 [data-theme="dark"] .priority-mid { background: #422006; color: #fde68a; }
-.topic-body { font-size: 15.5px; color: var(--text-secondary); }
-.topic-body p { margin-bottom: 8px; }
-.topic-body ul { padding-left: 20px; margin: 6px 0; }
-.topic-body li { margin-bottom: 6px; }
+.topic-body { font-size: 14.5px; color: var(--text-secondary); }
+.topic-body p { margin-bottom: 6px; }
+.topic-body .highlight {
+  background: var(--primary-light);
+  padding: 1px 6px; border-radius: 3px;
+  color: var(--primary); font-weight: 600;
+}
+.topic-body ul { padding-left: 18px; margin: 4px 0; }
+.topic-body li { margin-bottom: 4px; }
 .topic-card.marked {
-  border-left: 4px solid #22c55e;
-  opacity: 0.5;
+  border-left: 3px solid #22c55e;
+}
+.topic-card.marked .topic-body {
+  display: none;
 }
 .topic-card.marked .topic-title::after {
-  content: ' (已掌握)';
-  font-size: 13px;
+  content: ' (已掌握，点击展开)';
+  font-size: 12px;
   color: #22c55e;
   font-weight: normal;
 }
 .mark-btn {
-  margin-left: auto;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
+  float: right;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--card-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   transition: all 0.2s;
-  flex-shrink: 0;
 }
 .mark-btn:hover { background: #fef3c7; border-color: #f59e0b; }
 .mark-btn.marked { background: #dcfce7; border-color: #22c55e; }
 .toc-overlay {
   display: none;
   position: fixed; inset: 0; z-index: 2000;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
 }
 .toc-overlay.open { display: block; }
 .toc-panel {
   position: fixed; top: 0; left: 0; bottom: 0; z-index: 2001;
-  width: 280px; max-width: 85vw;
+  width: 300px; max-width: 80vw;
   background: var(--toc-bg);
-  padding: 20px 16px;
+  padding: 20px;
   overflow-y: auto;
   transform: translateX(-100%);
   transition: transform 0.3s;
@@ -204,10 +191,10 @@ body {
 .toc-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
 .toc-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14.5px;
+  font-size: 14px;
   transition: all 0.2s;
   margin-bottom: 4px;
 }
@@ -220,91 +207,69 @@ body {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
   background: var(--card-bg);
   border-top: 1px solid var(--border);
-  padding: 14px 16px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+  padding: 12px 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
   transition: background 0.3s;
 }
 .tts-bar.open { display: block; }
 .tts-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; text-align: center; }
 .tts-controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .tts-btn {
-  width: 44px; height: 44px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.2s;
 }
 .tts-btn:hover { background: var(--primary-light); color: var(--primary); }
-.tts-btn.play { width: 52px; height: 52px; background: var(--primary); color: #fff; border-color: var(--primary); }
+.tts-btn.play { width: 48px; height: 48px; background: var(--primary); color: #fff; border-color: var(--primary); }
 .tts-btn.play:hover { opacity: 0.85; }
 .tts-btn.play.active { background: var(--tts-active); border-color: var(--tts-active); }
 .tts-speed {
   display: flex; align-items: center; gap: 6px;
-  font-size: 13px; color: var(--text-secondary);
+  font-size: 12px; color: var(--text-secondary);
 }
 .tts-speed select {
-  padding: 6px 10px; border-radius: 6px;
+  padding: 2px 6px; border-radius: 4px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
-  font-size: 14px;
+  font-size: 12px;
 }
-.tts-voice { font-size: 12px; color: var(--text-secondary); margin-top: 6px; text-align: center; }
+.tts-voice { font-size: 12px; color: var(--text-secondary); margin-top: 4px; text-align: center; }
 .tts-highlight {
   background: #fef08a !important;
-  border-radius: 4px;
+  border-radius: 2px;
   transition: background 0.1s;
 }
 [data-theme="dark"] .tts-highlight {
   background: #713f12 !important;
 }
 .read-progress-badge {
-  position: fixed; bottom: 90px; right: 16px; z-index: 999;
-  font-size: 12px; color: var(--text-secondary);
+  position: fixed; bottom: 80px; right: 16px; z-index: 999;
+  font-size: 11px; color: var(--text-secondary);
   background: var(--card-bg);
-  padding: 8px 14px; border-radius: 20px;
+  padding: 6px 12px; border-radius: 20px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   opacity: 0;
   transition: opacity 0.3s;
 }
 .read-progress-badge.show { opacity: 1; }
-.content-image {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 12px;
-  margin: 12px 0;
-  box-shadow: var(--shadow);
-}
-.formula-box {
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border-left: 3px solid var(--primary);
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin: 8px 0;
-  font-family: "Times New Roman", serif;
-  font-size: 16px;
-  overflow-x: auto;
-}
-[data-theme="dark"] .formula-box {
-  background: linear-gradient(135deg, #1e293b, #334155);
-}
-@media (max-width: 768px) {
-  .main { padding: 12px 12px 110px; }
-  .topic-card { padding: 14px 14px; }
-  .subject-header { padding: 14px 16px; }
-  .header-title { font-size: 14px; max-width: 160px; }
-  .countdown-days { font-size: 36px; }
-  .countdown-text { font-size: 14px; }
+@media (max-width: 600px) {
+  .main { padding: 0 12px; }
+  .topic-card { padding: 14px 16px; }
+  .subject-header { padding: 12px 16px; }
+  .header-title { font-size: 14px; max-width: 140px; }
 }
 </style>
 </head>
 <body>
 <div class="header">
-  <div class="header-title">📚 高考复习资料</div>
+  <div class="header-title">📚 中高考复习资料</div>
   <div class="header-actions">
     <button class="header-btn" onclick="toggleTOC()" title="目录">☰</button>
     <button class="header-btn" onclick="toggleTTS()" title="语音朗读">🔊</button>
@@ -312,11 +277,6 @@ body {
   </div>
 </div>
 <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
-<div class="countdown-banner">
-  <span class="countdown-text">距离 2026 年高考还有</span>
-  <span class="countdown-days" id="countdownDays">--</span>
-  <span class="countdown-text">天，加油！</span>
-</div>
 <div class="toc-overlay" id="tocOverlay" onclick="toggleTOC()"></div>
 <div class="toc-panel" id="tocPanel">
   <div class="toc-title">📑 目录</div>
@@ -324,7 +284,7 @@ body {
 </div>
 <div class="main" id="mainContent"></div>
 <div class="tts-bar" id="ttsBar">
-  <div class="tts-info" id="ttsInfo">选择内容开始朗读</div>
+  <div class="tts-info" id="ttsInfo">选择一段文字开始朗读</div>
   <div class="tts-controls">
     <button class="tts-btn" onclick="ttsPrev()" title="上一句">⏮</button>
     <button class="tts-btn play" id="ttsPlayBtn" onclick="ttsToggle()" title="播放/暂停">▶</button>
@@ -333,10 +293,12 @@ body {
     <div class="tts-speed">
       <span>速度</span>
       <select id="ttsSpeed" onchange="ttsUpdateSpeed()">
+        <option value="0.5">0.5x</option>
         <option value="0.75">0.75x</option>
         <option value="1" selected>1x</option>
         <option value="1.25">1.25x</option>
         <option value="1.5">1.5x</option>
+        <option value="2">2x</option>
       </select>
     </div>
   </div>
@@ -346,385 +308,429 @@ body {
 <script>
 const DATA = [
   {
-    id: "math", title: "数学", icon: "📐", color: "#2563eb", tag: "数学", tagColor: "var(--tag-math)",
+    id: "math", title: "数学", icon: "📐", color: "#3b82f6", tag: "数学", tagColor: "var(--tag-math)",
     topics: [
       { title: "集合的基本概念", priority: "high", items: [
-        "集合的定义：由确定的、互不相同的元素组成的整体，常用大写字母A、B、C表示",
-        "元素的特性：确定性（元素是否属于集合是确定的）、互异性（集合中元素互不相同）、无序性（元素顺序无关）",
-        "常用数集：N（自然数集，含0）、N+（正整数集）、Z（整数集）、Q（有理数集）、R（实数集）",
-        "表示方法：列举法（{1,2,3}）、描述法（{x|x>0}）、韦恩图（用图形表示集合关系）"
+        "集合的定义：由确定的、互不相同的元素组成的整体，常用大写字母A、B、C表示。",
+        "元素的特性：确定性（元素是否属于集合是确定的）、互异性（集合中元素互不相同）、无序性（元素顺序无关）。",
+        "常用数集：N（自然数集，含0）、N+（正整数集）、Z（整数集）、Q（有理数集）、R（实数集）。",
+        "表示方法：列举法（{1,2,3}）、描述法（{x|x>0}）、韦恩图（用图形表示集合关系）。"
       ]},
       { title: "集合的运算", priority: "high", items: [
-        "交集（∩）：A∩B={x|x∈A且x∈B}，即两个集合的公共元素，性质：A∩B=B∩A，A∩A=A，A∩∅=∅",
-        "并集（∪）：A∪B={x|x∈A或x∈B}，即两个集合的所有元素，性质：A∪B=B∪A，A∪A=A，A∪∅=A",
-        "补集（∁U）：∁UA={x|x∈U且x∉A}，即全集中不属于A的元素，性质：A∪∁UA=U，A∩∁UA=∅",
-        "差集（-）：A-B={x|x∈A且x∉B}，即属于A但不属于B的元素"
+        "交集（∩）：A∩B={x|x∈A且x∈B}，即两个集合的公共元素，性质：A∩B=B∩A，A∩A=A，A∩∅=∅。",
+        "并集（∪）：A∪B={x|x∈A或x∈B}，即两个集合的所有元素，性质：A∪B=B∪A，A∪A=A，A∪∅=A。",
+        "补集（∁U）：∁UA={x|x∈U且x∉A}，即全集中不属于A的元素，性质：A∪∁UA=U，A∩∁UA=∅。",
+        "差集（-）：A-B={x|x∈A且x∉B}，即属于A但不属于B的元素。"
+      ]},
+      { title: "区间表示法", priority: "mid", items: [
+        "闭区间：[a,b]，表示a≤x≤b，包含端点a和b。",
+        "开区间：(a,b)，表示a<x<b，不包含端点。",
+        "半开半闭区间：[a,b)表示a≤x<b，(a,b]表示a<x≤b。",
+        "无穷区间：[a,+∞)表示x≥a，(-∞,b]表示x≤b，(-∞,+∞)表示全体实数。"
       ]},
       { title: "函数的概念", priority: "high", items: [
-        "函数定义：设A、B是非空数集，如果按照某种对应关系f，使对于集合A中的任意一个数x，在集合B中都有唯一确定的数f(x)和它对应，那么就称f:A→B为从集合A到集合B的一个函数",
-        "三要素：定义域（自变量x的取值范围）、值域（函数值y的取值范围）、对应关系（函数表达式）",
-        "表示方法：解析法（y=f(x)）、列表法、图像法",
-        "相等函数：定义域和对应关系都相同的两个函数相等，与函数名称无关"
+        "函数定义：设A、B是非空数集，如果按照某种对应关系f，使对于集合A中的任意一个数x，在集合B中都有唯一确定的数f(x)和它对应，那么就称f:A→B为从集合A到集合B的一个函数。",
+        "三要素：定义域（自变量x的取值范围）、值域（函数值y的取值范围）、对应关系（函数表达式）。",
+        "表示方法：解析法（y=f(x)）、列表法、图像法。",
+        "相等函数：定义域和对应关系都相同的两个函数相等，与函数名称无关。"
       ]},
       { title: "函数的定义域", priority: "high", items: [
-        "分式函数：分母不能为0，如y=1/x中x≠0",
-        "偶次根式：被开方数非负，如y=√x中x≥0",
-        "对数函数：真数大于0，底数大于0且不等于1，如y=log₂x中x>0",
-        "零次幂：底数不能为0，如y=x⁰中x≠0",
-        "实际问题：结合实际意义确定定义域，如人数不能为负数"
+        "分式函数：分母不能为0，如y=1/x中x≠0。",
+        "偶次根式：被开方数非负，如y=√x中x≥0。",
+        "对数函数：真数大于0，底数大于0且不等于1，如y=log₂x中x>0。",
+        "零次幂：底数不能为0，如y=x⁰中x≠0。",
+        "实际问题：结合实际意义确定定义域，如人数不能为负数。"
       ]},
       { title: "函数的值域", priority: "high", items: [
-        "配方法：适用于二次函数，如y=x²-2x+3=(x-1)²+2≥2，值域为[2,+∞)",
-        "单调性法：根据函数单调性求值域，如y=x在R上单调递增",
-        "换元法：将复杂函数转化为简单函数，如y=x+√(x-1)，令t=√(x-1)≥0",
-        "不等式法：利用基本不等式a+b≥2√(ab)（a,b>0）求最值"
+        "配方法：适用于二次函数，如y=x²-2x+3=(x-1)²+2≥2，值域为[2,+∞)。",
+        "单调性法：根据函数单调性求值域，如y=x在R上单调递增。",
+        "换元法：将复杂函数转化为简单函数，如y=x+√(x-1)，令t=√(x-1)≥0。",
+        "不等式法：利用基本不等式a+b≥2√(ab)（a,b>0）求最值。"
       ]},
       { title: "函数的单调性", priority: "high", items: [
-        "定义法：设x₁,x₂∈D，若x₁<x₂时恒有f(x₁)<f(x₂)，则f(x)在D上单调递增；若f(x₁)>f(x₂)，则单调递减",
-        "导数法：若f'(x)>0，则f(x)单调递增；若f'(x)<0，则f(x)单调递减",
-        "复合函数单调性：同增异减（内外函数单调性相同则增，不同则减）",
-        "常见结论：增+增=增，减+减=减，增-减=增，减-增=减"
+        "定义法：设x₁,x₂∈D，若x₁<x₂时恒有f(x₁)<f(x₂)，则f(x)在D上单调递增；若f(x₁)>f(x₂)，则单调递减。",
+        "导数法：若f'(x)>0，则f(x)单调递增；若f'(x)<0，则f(x)单调递减。",
+        "复合函数单调性：同增异减（内外函数单调性相同则增，不同则减）。",
+        "常见结论：增+增=增，减+减=减，增-减=增，减-增=减。"
       ]},
       { title: "函数的奇偶性", priority: "high", items: [
-        "判断前提：定义域关于原点对称，否则非奇非偶",
-        "偶函数：f(-x)=f(x)，图像关于y轴对称，如y=x²、y=|x|",
-        "奇函数：f(-x)=-f(x)，图像关于原点对称，如y=x³、y=sinx",
-        "重要性质：奇函数在x=0处有定义，则f(0)=0；偶函数的绝对值是偶函数"
+        "判断前提：定义域关于原点对称，否则非奇非偶。",
+        "偶函数：f(-x)=f(x)，图像关于y轴对称，如y=x²、y=|x|。",
+        "奇函数：f(-x)=-f(x)，图像关于原点对称，如y=x³、y=sinx。",
+        "重要性质：奇函数在x=0处有定义，则f(0)=0；偶函数的绝对值是偶函数。"
       ]},
       { title: "二次函数", priority: "high", items: [
-        "一般式：y=ax²+bx+c（a≠0），a决定开口方向（a>0向上，a<0向下）",
-        "顶点式：y=a(x-h)²+k，顶点坐标为(h,k)，对称轴为x=h",
-        "交点式：y=a(x-x₁)(x-x₂)，x₁、x₂是与x轴交点的横坐标",
-        "判别式：Δ=b²-4ac，Δ>0有两个不等实根，Δ=0有一个实根，Δ<0无实根",
-        "最值：a>0时，x=-b/(2a)时y有最小值(4ac-b²)/(4a)；a<0时，x=-b/(2a)时y有最大值"
+        "一般式：y=ax²+bx+c（a≠0），a决定开口方向（a>0向上，a<0向下），a的绝对值越大开口越窄。",
+        "顶点式：y=a(x-h)²+k，顶点坐标为(h,k)，对称轴为x=h。",
+        "交点式：y=a(x-x₁)(x-x₂)，x₁、x₂是与x轴交点的横坐标。",
+        "判别式：Δ=b²-4ac，Δ>0有两个不等实根，Δ=0有一个实根，Δ<0无实根。",
+        "最值：a>0时，x=-b/(2a)时y有最小值(4ac-b²)/(4a)；a<0时，x=-b/(2a)时y有最大值。"
       ]},
       { title: "指数函数", priority: "high", items: [
-        "定义：y=a^x（a>0且a≠1），定义域为R，值域为(0,+∞)",
-        "图像特征：恒过点(0,1)；a>1时单调递增，0<a<1时单调递减",
-        "运算性质：a^m·a^n=a^(m+n)，a^m÷a^n=a^(m-n)，(a^m)^n=a^(mn)，a^0=1（a≠0）",
-        "特殊值：a^(-n)=1/a^n，√a=a^(1/2)，a^(m/n)=ⁿ√(a^m)"
+        "定义：y=a^x（a>0且a≠1），定义域为R，值域为(0,+∞)。",
+        "图像特征：恒过点(0,1)；a>1时单调递增，0<a<1时单调递减。",
+        "运算性质：a^m·a^n=a^(m+n)，a^m÷a^n=a^(m-n)，(a^m)^n=a^(mn)，a^0=1（a≠0）。",
+        "特殊值：a^(-n)=1/a^n，√a=a^(1/2)，a^(m/n)=ⁿ√(a^m)。"
       ]},
       { title: "对数函数", priority: "high", items: [
-        "定义：y=logₐx（a>0且a≠1），定义域为(0,+∞)，值域为R",
-        "图像特征：恒过点(1,0)；a>1时单调递增，0<a<1时单调递减",
-        "运算性质：logₐ(M·N)=logₐM+logₐN，logₐ(M/N)=logₐM-logₐN，logₐMⁿ=nlogₐM",
-        "换底公式：logₐb=log_c b/log_c a，常用logₐb=ln b/ln a或logₐb=lg b/lg a"
+        "定义：y=log_a x（a>0且a≠1），定义域为(0,+∞)，值域为R。",
+        "图像特征：恒过点(1,0)；a>1时单调递增，0<a<1时单调递减。",
+        "运算性质：log_a(M·N)=log_aM+log_aN，log_a(M/N)=log_aM-log_aN，log_aM^n=nlog_aM。",
+        "换底公式：log_ab=log_cb/log_ca，常用log_ab=ln b/ln a或log_ab=lg b/lg a。"
       ]},
       { title: "等差数列", priority: "high", items: [
-        "定义：从第二项起，每一项与前一项的差为常数d（公差），即aₙ₊₁-aₙ=d",
-        "通项公式：aₙ=a₁+(n-1)d，已知首项a₁和公差d可求任意项",
-        "求和公式：Sₙ=n(a₁+aₙ)/2=na₁+n(n-1)d/2",
-        "重要性质：若m+n=p+q，则aₘ+aₙ=aₚ+a_q；连续k项的和成等差数列"
+        "定义：从第二项起，每一项与前一项的差为常数d（公差），即aₙ₊₁-aₙ=d。",
+        "通项公式：aₙ=a₁+(n-1)d，已知首项a₁和公差d可求任意项。",
+        "求和公式：Sₙ=n(a₁+aₙ)/2=na₁+n(n-1)d/2。",
+        "重要性质：若m+n=p+q，则aₘ+aₙ=aₚ+a_q；连续k项的和成等差数列。"
       ]},
       { title: "等比数列", priority: "high", items: [
-        "定义：从第二项起，每一项与前一项的比为常数q（公比），即aₙ₊₁/aₙ=q（q≠0）",
-        "通项公式：aₙ=a₁q^(n-1)，注意q≠0，a₁≠0",
-        "求和公式：q≠1时Sₙ=a₁(1-qⁿ)/(1-q)；q=1时Sₙ=na₁（常考q=1的特殊情况）",
-        "重要性质：若m+n=p+q，则aₘ·aₙ=aₚ·a_q；连续k项的和（不为0）成等比数列"
+        "定义：从第二项起，每一项与前一项的比为常数q（公比），即aₙ₊₁/aₙ=q（q≠0）。",
+        "通项公式：aₙ=a₁q^(n-1)，注意q≠0，a₁≠0。",
+        "求和公式：q≠1时Sₙ=a₁(1-qⁿ)/(1-q)；q=1时Sₙ=na₁（常考q=1的特殊情况）。",
+        "重要性质：若m+n=p+q，则aₘ·aₙ=aₚ·a_q；连续k项的和（不为0）成等比数列。"
       ]},
       { title: "概率基础", priority: "high", items: [
-        "概率定义：事件发生的可能性大小，0≤P(A)≤1，必然事件P=1，不可能事件P=0",
-        "古典概型：满足有限性（基本事件有限个）和等可能性（每个基本事件概率相等），P(A)=事件A包含的基本事件数/总基本事件数",
-        "互斥事件：不能同时发生的事件，P(A∪B)=P(A)+P(B)",
-        "对立事件：A与∁UA，P(A)+P(∁UA)=1"
+        "概率定义：事件发生的可能性大小，0≤P(A)≤1，必然事件P=1，不可能事件P=0。",
+        "古典概型：满足有限性（基本事件有限个）和等可能性（每个基本事件概率相等），P(A)=事件A包含的基本事件数/总基本事件数。",
+        "互斥事件：不能同时发生的事件，P(A∪B)=P(A)+P(B)。",
+        "对立事件：A与∁UA，P(A)+P(∁UA)=1。"
       ]},
       { title: "统计", priority: "high", items: [
-        "平均数：反映数据平均水平，x̄=(x₁+x₂+…+xₙ)/n",
-        "中位数：将数据从小到大排列后位于中间位置的数（n为奇数取中间，n为偶数取中间两数的平均）",
-        "众数：出现次数最多的数，可能有多个",
-        "方差：反映数据波动大小，s²=1/n[(x₁-x̄)²+(x₂-x̄)²+…+(xₙ-x̄)²]，方差越小数据越稳定",
-        "标准差：s=√s²，与数据单位相同，更易理解"
+        "平均数：反映数据平均水平，¯x=(x₁+x₂+...+xₙ)/n。",
+        "中位数：将数据从小到大排列后位于中间位置的数（n为奇数取中间，n为偶数取中间两数的平均）。",
+        "众数：出现次数最多的数，可能有多个。",
+        "方差：反映数据波动大小，s²=1/n[(x₁-¯x)²+(x₂-¯x)²+...+(xₙ-¯x)²]，方差越小数据越稳定。",
+        "标准差：s=√s²，与数据单位相同，更易理解。"
       ]},
       { title: "排列组合", priority: "mid", items: [
-        "排列（有序）：从n个不同元素中取k个排成一列，A(n,k)=n!/(n-k)!",
-        "组合（无序）：从n个不同元素中取k个组成一组，C(n,k)=n!/(k!(n-k)!)",
-        "乘法原理：分步完成，总方法数=各步方法数相乘",
-        "加法原理：分类完成，总方法数=各类方法数相加"
+        "排列（有序）：从n个不同元素中取k个排成一列，A(n,k)=n!/(n-k)!。",
+        "组合（无序）：从n个不同元素中取k个组成一组，C(n,k)=n!/(k!(n-k)!)。",
+        "乘法原理：分步完成，总方法数=各步方法数相乘。",
+        "加法原理：分类完成，总方法数=各类方法数相加。"
       ]},
       { title: "立体几何", priority: "high", items: [
-        "空间中的线线关系：平行（没有公共点）、相交（有一个公共点）、异面（不同在任何一个平面内）",
-        "线面平行判定：平面外一条直线与平面内一条直线平行，则线面平行",
-        "线面垂直判定：一条直线与平面内两条相交直线都垂直，则线面垂直",
-        "面面平行判定：一个平面内两条相交直线分别平行于另一个平面，则面面平行",
-        "面面垂直判定：一个平面经过另一个平面的一条垂线，则面面垂直",
-        "常见体积公式：柱体V=Sh，锥体V=Sh/3，球体V=4πr³/3"
+        "空间中的线线关系：平行（没有公共点）、相交（有一个公共点）、异面（不同在任何一个平面内）。",
+        "线面平行判定：平面外一条直线与平面内一条直线平行，则线面平行。",
+        "线面垂直判定：一条直线与平面内两条相交直线都垂直，则线面垂直。",
+        "面面平行判定：一个平面内两条相交直线分别平行于另一个平面，则面面平行。",
+        "面面垂直判定：一个平面经过另一个平面的一条垂线，则面面垂直。",
+        "常见体积公式：柱体V=Sh，锥体V=Sh/3，球体V=4πr³/3。",
+        "表面积公式：柱体表面积=侧面积+2×底面积，球体表面积=4πr²。"
       ]},
       { title: "三角函数", priority: "high", items: [
-        "弧度制：180°=π弧度，1弧度=(180/π)°≈57.3°，弧长l=αr（α为圆心角弧度）",
-        "同角三角函数关系：sin²x+cos²x=1，tanx=sinx/cosx（x≠π/2+kπ）",
-        "诱导公式：奇变偶不变，符号看象限（如sin(π-x)=sinx，sin(π/2+x)=cosx）",
-        "特殊角三角函数值：sin30°=1/2，sin45°=√2/2，sin60°=√3/2；cos30°=√3/2，cos45°=√2/2，cos60°=1/2；tan30°=√3/3，tan45°=1，tan60°=√3",
-        "三角函数周期：sinx、cosx周期为2π，tanx周期为π；y=sin(ωx+φ)周期T=2π/|ω|"
+        "弧度制：180°=π弧度，1弧度=(180/π)°≈57.3°，弧长l=αr（α为圆心角弧度）。",
+        "同角三角函数关系：sin²x+cos²x=1，tanx=sinx/cosx（x≠π/2+kπ）。",
+        "诱导公式：奇变偶不变，符号看象限（如sin(π-x)=sinx，sin(π/2+x)=cosx）。",
+        "特殊角三角函数值：sin30°=1/2，sin45°=√2/2，sin60°=√3/2；cos30°=√3/2，cos45°=√2/2，cos60°=1/2；tan30°=√3/3，tan45°=1，tan60°=√3。",
+        "三角函数周期：sinx、cosx周期为2π，tanx周期为π；y=sin(ωx+φ)周期T=2π/|ω|。"
       ]},
       { title: "导数", priority: "mid", items: [
-        "导数定义：f'(x)=lim(Δx→0)[f(x+Δx)-f(x)]/Δx，表示函数在x处的瞬时变化率",
-        "基本导数公式：(xⁿ)'=nx^(n-1)，(sinx)'=cosx，(cosx)'=-sinx，(lnx)'=1/x（x>0），(e^x)'=e^x",
-        "导数应用：判断单调性（f'(x)>0递增，f'(x)<0递减），求极值（f'(x)=0且两侧符号改变），求最值（比较极值和端点值）"
+        "导数定义：f'(x)=lim(Δx→0)[f(x+Δx)-f(x)]/Δx，表示函数在x处的瞬时变化率。",
+        "基本导数公式：(xⁿ)'=nx^(n-1)，(sinx)'=cosx，(cosx)'=-sinx，(lnx)'=1/x（x>0），(e^x)'=e^x。",
+        "导数应用：判断单调性（f'(x)>0递增，f'(x)<0递减），求极值（f'(x)=0且两侧符号改变），求最值（比较极值和端点值）。"
       ]}
     ]
   },
   {
-    id: "physics", title: "物理", icon: "⚛️", color: "#059669", tag: "物理", tagColor: "var(--tag-physics)",
+    id: "physics", title: "物理", icon: "⚛️", color: "#10b981", tag: "物理", tagColor: "var(--tag-physics)",
     topics: [
       { title: "运动的描述", priority: "high", items: [
-        "质点：用来代替物体的有质量的点，当物体大小形状对研究问题影响可忽略时可视为质点",
-        "参考系：描述物体运动时选作参考的其他物体，运动是相对的，选择不同参考系描述结果不同",
-        "时间与时刻：时刻是某一瞬间（如8点整），时间是两个时刻间的间隔（如1小时）",
-        "位移与路程：位移是从初位置到末位置的有向线段（矢量），路程是运动轨迹长度（标量），路程≥位移大小"
+        "质点：用来代替物体的有质量的点，当物体大小形状对研究问题影响可忽略时可视为质点。",
+        "参考系：描述物体运动时选作参考的其他物体，运动是相对的，选择不同参考系描述结果不同。",
+        "时间与时刻：时刻是某一瞬间（如8点整），时间是两个时刻间的间隔（如1小时）。",
+        "位移与路程：位移是从初位置到末位置的有向线段（矢量），路程是运动轨迹长度（标量），路程≥位移大小。"
       ]},
       { title: "匀变速直线运动", priority: "high", items: [
-        "加速度：描述速度变化快慢，a=(v-v₀)/t，单位m/s²，方向与速度变化量方向一致",
-        "速度公式：v=v₀+at（v₀为初速度，a为加速度，t为时间）",
-        "位移公式：s=v₀t+½at²",
-        "速度-位移公式：v²-v₀²=2as（无需时间即可求速度或位移，高频考点）",
-        "推论：平均速度v̄=(v₀+v)/2，中间时刻速度=平均速度，相邻相等时间内位移差Δs=aT²"
+        "加速度：描述速度变化快慢，a=(v-v₀)/t，单位m/s²，方向与速度变化量方向一致。",
+        "速度公式：v=v₀+at（v₀为初速度，a为加速度，t为时间）。",
+        "位移公式：s=v₀t+½at²。",
+        "速度-位移公式：v²-v₀²=2as（无需时间即可求速度或位移，高频考点）。",
+        "推论：平均速度v̄=(v₀+v)/2，中间时刻速度=平均速度，相邻相等时间内位移差Δs=aT²。"
       ]},
       { title: "自由落体运动", priority: "high", items: [
-        "定义：只在重力作用下从静止开始的运动，初速度v₀=0，加速度a=g≈9.8m/s²（一般计算取10m/s²）",
-        "公式：v=gt，h=½gt²，v²=2gh",
-        "特点：同一地点，一切物体自由下落的加速度相同，与质量无关"
+        "定义：只在重力作用下从静止开始的运动，初速度v₀=0，加速度a=g≈9.8m/s²（一般计算取10m/s²）。",
+        "公式：v=gt，h=½gt²，v²=2gh。",
+        "特点：同一地点，一切物体自由下落的加速度相同，与质量无关。"
       ]},
       { title: "牛顿第一定律", priority: "high", items: [
-        "内容：一切物体总保持匀速直线运动状态或静止状态，直到有外力迫使它改变这种状态",
-        "惯性：物体保持原来运动状态的性质，质量是惯性大小的唯一量度，质量越大惯性越大",
-        "力与运动的关系：力不是维持运动的原因，而是改变运动状态的原因（产生加速度）"
+        "内容：一切物体总保持匀速直线运动状态或静止状态，直到有外力迫使它改变这种状态。",
+        "惯性：物体保持原来运动状态的性质，质量是惯性大小的唯一量度，质量越大惯性越大。",
+        "力与运动的关系：力不是维持运动的原因，而是改变运动状态的原因（产生加速度）。"
       ]},
       { title: "牛顿第二定律", priority: "high", items: [
-        "内容：物体加速度与所受合力成正比，与质量成反比，a=F合/m，即F合=ma",
-        "矢量性：加速度方向与合力方向一致",
-        "瞬时性：力和加速度同时产生、同时变化、同时消失",
-        "独立性：每个力独立产生各自的加速度，合力产生合加速度"
+        "内容：物体加速度与所受合力成正比，与质量成反比，a=F合/m，即F合=ma。",
+        "矢量性：加速度方向与合力方向一致。",
+        "瞬时性：力和加速度同时产生、同时变化、同时消失。",
+        "独立性：每个力独立产生各自的加速度，合力产生合加速度。"
       ]},
       { title: "牛顿第三定律", priority: "high", items: [
-        "内容：两个物体之间的作用力和反作用力总是大小相等、方向相反、作用在同一条直线上",
-        "特点：作用力与反作用力同时产生、同时消失，性质相同，作用在不同物体上（不能相互抵消）",
-        "实例：人推墙，墙也推人；地球吸引物体，物体也吸引地球"
+        "内容：两个物体之间的作用力和反作用力总是大小相等、方向相反、作用在同一条直线上。",
+        "特点：作用力与反作用力同时产生、同时消失，性质相同，作用在不同物体上（不能相互抵消）。",
+        "实例：人推墙，墙也推人；地球吸引物体，物体也吸引地球。"
       ]},
       { title: "受力分析", priority: "high", items: [
-        "步骤：确定研究对象→画出重力（竖直向下）→画出弹力（接触且挤压，垂直接触面）→画出摩擦力（有相对运动或趋势）→其他力（如拉力、推力）",
-        "重力：G=mg，方向竖直向下，作用点在重心（均匀物体在几何中心）",
-        "弹力产生条件：接触且发生弹性形变，方向垂直接触面（支持力向上，压力向下，绳的拉力沿绳收缩方向）",
-        "摩擦力：静摩擦力（相对静止有趋势，0≤f静≤f静max，方向与趋势相反）；滑动摩擦力（相对滑动，f滑=μN，μ为动摩擦因数，N为正压力）"
+        "步骤：确定研究对象→画出重力（竖直向下）→画出弹力（接触且挤压，垂直接触面）→画出摩擦力（有相对运动或趋势）→其他力（如拉力、推力），遵循先重力后弹力再摩擦力的顺序。",
+        "重力：G=mg，方向竖直向下，作用点在重心（均匀物体在几何中心），g≈9.8m/s²，一般计算取10m/s²。",
+        "弹力产生条件：接触且发生弹性形变，方向垂直接触面（支持力向上，压力向下，绳的拉力沿绳收缩方向）。",
+        "摩擦力：静摩擦力（相对静止有趋势，0≤f静≤f静max，方向与趋势相反）；滑动摩擦力（相对滑动，f滑=μN，μ为动摩擦因数，N为正压力）。"
       ]},
       { title: "共点力平衡", priority: "high", items: [
-        "平衡状态：静止或匀速直线运动，合力为零",
-        "二力平衡：两个力大小相等、方向相反、作用在同一直线上",
-        "多力平衡：正交分解法，将力分解到x、y轴，分别满足ΣFₓ=0，ΣFᵧ=0"
+        "平衡状态：静止或匀速直线运动，合力为零。",
+        "二力平衡：两个力大小相等、方向相反、作用在同一直线上。",
+        "多力平衡：正交分解法，将力分解到x、y轴，分别满足ΣFₓ=0，ΣFᵧ=0。"
       ]},
       { title: "功", priority: "high", items: [
-        "定义：力对物体做功，W=Fs·cosθ（θ为F与s的夹角），单位焦耳（J）",
-        "做功条件：有力作用在物体上，物体在力的方向上有位移",
-        "正负功判断：θ<90°做正功（动力），θ>90°做负功（阻力），θ=90°不做功（力与位移垂直）",
-        "总功：各力做功的代数和，或合力做的功"
+        "定义：力对物体做功，W=Fs·cosθ（θ为F与s的夹角），单位焦耳（J）。",
+        "做功条件：有力作用在物体上，物体在力的方向上有位移。",
+        "正负功判断：θ<90°做正功（动力），θ>90°做负功（阻力），θ=90°不做功（力与位移垂直）。",
+        "总功：各力做功的代数和，或合力做的功。"
       ]},
       { title: "功率", priority: "high", items: [
-        "定义：描述做功快慢，P=W/t，单位瓦特（W），1kW=1000W",
-        "瞬时功率：P=Fv·cosθ（v为瞬时速度），匀速时P=Fv",
-        "平均功率：P̄=W/t或P̄=Fv̄·cosθ（v̄为平均速度）",
-        "额定功率：机器正常工作时的最大功率，实际功率≤额定功率"
+        "定义：描述做功快慢，P=W/t，单位瓦特（W），1kW=1000W。",
+        "瞬时功率：P=Fv·cosθ（v为瞬时速度），匀速时P=Fv。",
+        "平均功率：P̄=W/t或P̄=Fv̄·cosθ（v̄为平均速度）。",
+        "额定功率：机器正常工作时的最大功率，实际功率≤额定功率。"
       ]},
       { title: "动能", priority: "high", items: [
-        "定义：物体由于运动而具有的能量，Eₖ=½mv²，单位J，是标量，速度越大动能越大",
-        "动能定理：合外力做的功等于动能的变化，W合=ΔEₖ=Eₖ₂-Eₖ₁",
-        "应用：可求变力做功、曲线运动中的功，无需考虑中间过程"
+        "定义：物体由于运动而具有的能量，Eₖ=½mv²，单位J，是标量，速度越大动能越大。",
+        "动能定理：合外力做的功等于动能的变化，W合=ΔEₖ=Eₖ₂-Eₖ₁。",
+        "应用：可求变力做功、曲线运动中的功，无需考虑中间过程。"
       ]},
       { title: "势能", priority: "high", items: [
-        "重力势能：Eₚ=mgh（h为相对于参考平面的高度），单位J，标量，有正负（取决于参考平面选择）",
-        "重力做功与势能变化：W_G=Eₚ₁-Eₚ₂，即重力做功等于重力势能的减少量",
-        "弹性势能：物体发生弹性形变时具有的能量，与形变量和劲度系数有关，Eₚ=½kx²（弹簧）"
+        "重力势能：Eₚ=mgh（h为相对于参考平面的高度），单位J，标量，有正负（取决于参考平面选择）。",
+        "重力做功与势能变化：W_G=Eₚ₁-Eₚ₂，即重力做功等于重力势能的减少量。",
+        "弹性势能：物体发生弹性形变时具有的能量，与形变量和劲度系数有关，Eₚ=½kx²（弹簧）。"
       ]},
       { title: "机械能守恒定律", priority: "high", items: [
-        "机械能：动能与势能的总和，E=Eₖ+Eₚ",
-        "守恒条件：只有重力、弹力做功（其他力不做功或做功总和为零）",
-        "表达式：E₁=E₂（初态机械能=末态机械能），或ΔEₖ=-ΔEₚ（动能增加量=势能减少量）",
-        "应用：抛体运动、单摆、弹簧振子等问题，避开复杂的受力分析"
+        "机械能：动能与势能的总和，E=Eₖ+Eₚ。",
+        "守恒条件：只有重力、弹力做功（其他力不做功或做功总和为零）。",
+        "表达式：E₁=E₂（初态机械能=末态机械能），或ΔEₖ=-ΔEₚ（动能增加量=势能减少量）。",
+        "应用：抛体运动、单摆、弹簧振子等问题，避开复杂的受力分析。"
       ]},
       { title: "能量守恒定律", priority: "high", items: [
-        "内容：能量既不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式，或者从一个物体转移到另一个物体，在转化或转移过程中，能量的总量保持不变",
-        "常见能量形式：机械能、内能、电能、化学能、光能等",
-        "能量转化：如摩擦生热（机械能→内能），发电机（机械能→电能），光合作用（光能→化学能）"
+        "内容：能量既不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式，或者从一个物体转移到另一个物体，在转化或转移过程中，能量的总量保持不变。",
+        "常见能量形式：机械能、内能、电能、化学能、光能等。",
+        "能量转化：如摩擦生热（机械能→内能），发电机（机械能→电能），光合作用（光能→化学能）。"
       ]},
       { title: "电路基础", priority: "high", items: [
-        "电流：电荷的定向移动形成电流，I=q/t，单位安培（A），方向规定为正电荷移动方向",
-        "电压：电势差，U=W/q，单位伏特（V），是形成电流的原因",
-        "电阻：导体对电流的阻碍作用，R=ρL/S（ρ为电阻率，L为长度，S为横截面积），单位欧姆（Ω）",
-        "电阻定律：电阻与长度成正比，与横截面积成反比，与材料性质有关"
+        "电流：电荷的定向移动形成电流，I=q/t，单位安培（A），方向规定为正电荷移动方向。",
+        "电压：电势差，U=W/q，单位伏特（V），是形成电流的原因。",
+        "电阻：导体对电流的阻碍作用，R=ρL/S（ρ为电阻率，L为长度，S为横截面积），单位欧姆（Ω）。",
+        "电阻定律：电阻与长度成正比，与横截面积成反比，与材料性质有关。"
       ]},
       { title: "欧姆定律", priority: "high", items: [
-        "内容：导体中的电流与导体两端电压成正比，与导体电阻成反比，I=U/R",
-        "适用条件：纯电阻电路（电能全部转化为内能，如电灯、电阻丝）",
-        "U-I图像：过原点的直线，斜率为电阻R"
+        "内容：导体中的电流与导体两端电压成正比，与导体电阻成反比，I=U/R。",
+        "适用条件：纯电阻电路（电能全部转化为内能，如电灯、电阻丝）。",
+        "U-I图像：过原点的直线，斜率为电阻R。"
       ]},
       { title: "串并联电路", priority: "high", items: [
-        "串联电路：电流处处相等（I=I₁=I₂=…），总电压等于各部分电压之和（U=U₁+U₂+…），总电阻等于各电阻之和（R=R₁+R₂+…）",
-        "并联电路：各支路电压相等（U=U₁=U₂=…），总电流等于各支路电流之和（I=I₁+I₂+…），总电阻倒数等于各电阻倒数之和（1/R=1/R₁+1/R₂+…）",
-        "分流分压：串联分压（U₁/U₂=R₁/R₂），并联分流（I₁/I₂=R₂/R₁）"
+        "串联电路：电流处处相等（I=I₁=I₂=...），总电压等于各部分电压之和（U=U₁+U₂+...），总电阻等于各电阻之和（R=R₁+R₂+...）。",
+        "并联电路：各支路电压相等（U=U₁=U₂=...），总电流等于各支路电流之和（I=I₁+I₂+...），总电阻倒数等于各电阻倒数之和（1/R=1/R₁+1/R₂+...）。",
+        "分流分压：串联分压（U₁/U₂=R₁/R₂），并联分流（I₁/I₂=R₂/R₁）。"
       ]},
       { title: "电功与电功率", priority: "high", items: [
-        "电功：电流做的功，W=UIt，单位焦耳（J），1kWh=3.6×10⁶J",
-        "电功率：电流做功快慢，P=UI（普适），单位瓦特（W）",
-        "纯电阻电路：P=I²R=U²/R（欧姆定律推导）",
-        "焦耳定律：电流通过导体产生的热量Q=I²Rt（适用于所有电路），纯电阻电路中Q=W=UIt"
+        "电功：电流做的功，W=UIt，单位焦耳（J），1kWh=3.6×10⁶J。",
+        "电功率：电流做功快慢，P=UI（普适），单位瓦特（W）。",
+        "纯电阻电路：P=I²R=U²/R（欧姆定律推导）。",
+        "焦耳定律：电流通过导体产生的热量Q=I²Rt（适用于所有电路），纯电阻电路中Q=W=UIt。"
       ]}
     ]
   },
   {
-    id: "chemistry", title: "化学", icon: "🧪", color: "#d97706", tag: "化学", tagColor: "var(--tag-chemistry)",
+    id: "chemistry", title: "化学", icon: "🧪", color: "#f59e0b", tag: "化学", tagColor: "var(--tag-chemistry)",
     topics: [
       { title: "物质的分类", priority: "high", items: [
-        "纯净物：由一种物质组成，有固定组成和性质，分为单质（如O₂、Fe）和化合物（如H₂O、NaCl）",
-        "混合物：由两种或多种物质组成，无固定组成，如空气、溶液、合金",
-        "单质分类：金属单质（Fe、Cu）、非金属单质（O₂、C）、稀有气体（He、Ne）",
-        "化合物分类：氧化物（CO₂、Fe₂O₃）、酸（HCl、H₂SO₄）、碱（NaOH、Ca(OH)₂）、盐（NaCl、Na₂CO₃）"
+        "纯净物：由一种物质组成，有固定组成和性质，分为单质（如O₂、Fe）和化合物（如H₂O、NaCl）。",
+        "混合物：由两种或多种物质组成，无固定组成，如空气、溶液、合金。",
+        "单质分类：金属单质（Fe、Cu）、非金属单质（O₂、C）、稀有气体（He、Ne）。",
+        "化合物分类：氧化物（CO₂、Fe₂O₃）、酸（HCl、H₂SO₄）、碱（NaOH、Ca(OH)₂）、盐（NaCl、Na₂CO₃）。"
       ]},
       { title: "化学用语", priority: "high", items: [
-        "元素符号：表示元素的符号，如H（氢）、O（氧），第一个字母大写，第二个字母小写",
-        "化学式：用元素符号表示物质组成的式子，如H₂O、NaCl，可表示物质组成和构成",
-        "化学方程式：用化学式表示化学反应的式子，如2H₂+O₂点燃→2H₂O，需遵循质量守恒定律",
-        "离子符号：表示离子的符号，如Na⁺、Cl⁻、SO₄²⁻，右上角标电荷数和正负"
+        "元素符号：表示元素的符号，如H（氢）、O（氧），第一个字母大写，第二个字母小写。",
+        "化学式：用元素符号表示物质组成的式子，如H₂O、NaCl，可表示物质组成和构成。",
+        "化学方程式：用化学式表示化学反应的式子，如2H₂+O₂点燃→2H₂O，需遵循质量守恒定律。",
+        "离子符号：表示离子的符号，如Na⁺、Cl⁻、SO₄²⁻，右上角标电荷数和正负。"
       ]},
       { title: "物质的量", priority: "high", items: [
-        "n=m/M（质量÷摩尔质量）",
-        "n=N/Nₐ（粒子数÷阿伏伽德罗常数，Nₐ≈6.02×10²³mol⁻¹）",
-        "n=V/Vₘ（标况下气体体积÷22.4L/mol）",
-        "物质的量浓度：c=n/V（n为溶质物质的量，V为溶液体积）"
+        "n=m/M（质量÷摩尔质量）。",
+        "n=N/Nₐ（粒子数÷阿伏伽德罗常数，Nₐ≈6.02×10²³mol⁻¹）。",
+        "n=V/Vₘ（标况下气体体积÷22.4L/mol）。",
+        "物质的量浓度：c=n/V（n为溶质物质的量，V为溶液体积）。"
       ]},
       { title: "氧化还原", priority: "high", items: [
-        "升失氧还：化合价升高→失电子→被氧化→还原剂",
-        "降得还氧：化合价降低→得电子→被还原→氧化剂",
-        "得失电子守恒：氧化剂得电子数=还原剂失电子数，这是配平的核心依据"
+        "升失氧还：化合价升高→失电子→被氧化→还原剂。",
+        "降得还氧：化合价降低→得电子→被还原→氧化剂。",
+        "得失电子守恒：氧化剂得电子数=还原剂失电子数，这是配平的核心依据。"
       ]},
       { title: "离子反应", priority: "high", items: [
-        "离子方程式：用实际参加反应的离子符号表示反应的式子，如H⁺+OH⁻→H₂O",
-        "书写步骤：写（化学方程式）→拆（强酸、强碱、可溶盐拆成离子）→删（删除不参加反应的离子）→查（原子守恒、电荷守恒）",
-        "离子共存：离子之间不发生反应（不生成沉淀、气体、水或弱电解质）则可共存",
-        "常见沉淀：AgCl、BaSO₄、CaCO₃、Fe(OH)₃、Cu(OH)₂等"
+        "离子方程式：用实际参加反应的离子符号表示反应的式子，如H⁺+OH⁻→H₂O。",
+        "书写步骤：写（化学方程式）→拆（强酸、强碱、可溶盐拆成离子）→删（删除不参加反应的离子）→查（原子守恒、电荷守恒）。",
+        "离子共存：离子之间不发生反应（不生成沉淀、气体、水或弱电解质）则可共存。",
+        "常见沉淀：AgCl、BaSO₄、CaCO₃、Fe(OH)₃、Cu(OH)₂等。"
       ]},
       { title: "电解质", priority: "high", items: [
-        "电解质：在水溶液中或熔融状态下能导电的化合物，如酸、碱、盐",
-        "非电解质：在水溶液中和熔融状态下都不能导电的化合物，如蔗糖、酒精",
-        "强电解质：完全电离的电解质，如强酸（HCl、H₂SO₄、HNO₃）、强碱（NaOH、KOH、Ba(OH)₂）、大多数盐",
-        "弱电解质：部分电离的电解质，如弱酸（CH₃COOH）、弱碱（NH₃·H₂O）、水"
+        "电解质：在水溶液中或熔融状态下能导电的化合物，如酸、碱、盐。",
+        "非电解质：在水溶液中和熔融状态下都不能导电的化合物，如蔗糖、酒精。",
+        "强电解质：完全电离的电解质，如强酸（HCl、H₂SO₄、HNO₃）、强碱（NaOH、KOH、Ba(OH)₂）、大多数盐。",
+        "弱电解质：部分电离的电解质，如弱酸（CH₃COOH）、弱碱（NH₃·H₂O）、水。"
       ]},
       { title: "元素周期律", priority: "high", items: [
-        "同周期左→右：金属性减弱，非金属性增强，原子半径减小",
-        "同主族上→下：金属性增强，非金属性减弱，原子半径增大",
-        "金属性越强，最高价氧化物对应水化物的碱性越强；非金属性越强，最高价氧化物对应水化物的酸性越强，氢化物越稳定"
+        "同周期左→右：金属性减弱，非金属性增强，原子半径减小。",
+        "同主族上→下：金属性增强，非金属性减弱，原子半径增大。",
+        "金属性越强，最高价氧化物对应水化物的碱性越强；非金属性越强，最高价氧化物对应水化物的酸性越强，氢化物越稳定。"
       ]},
       { title: "化学平衡", priority: "high", items: [
-        "勒夏特列原理：改变影响平衡的一个条件，平衡向减弱这种改变的方向移动",
-        "升高温度，平衡向吸热方向移动；降低温度，平衡向放热方向移动",
-        "增大压强，平衡向气体分子数减少的方向移动；减小压强，平衡向气体分子数增多的方向移动",
-        "催化剂：同等程度改变正逆速率，平衡不移动"
+        "勒夏特列原理：改变影响平衡的一个条件，平衡向减弱这种改变的方向移动。",
+        "升高温度，平衡向吸热方向移动；降低温度，平衡向放热方向移动。",
+        "增大压强，平衡向气体分子数减少的方向移动；减小压强，平衡向气体分子数增多的方向移动。",
+        "催化剂：同等程度改变正逆速率，平衡不移动。"
       ]},
       { title: "化学实验基本操作", priority: "high", items: [
-        "药品取用：固体用药匙或镊子，液体用胶头滴管或倾倒，注意节约和安全",
-        "物质加热：液体在试管中加热时液体不超过1/3，管口不对人；固体加热时试管口略向下倾斜",
-        "过滤：一贴（滤纸紧贴漏斗）、二低（滤纸低于漏斗、液面低于滤纸）、三靠（烧杯靠玻璃棒、玻璃棒靠滤纸、漏斗靠烧杯）",
-        "蒸发：用玻璃棒搅拌防止局部过热，接近蒸干时停止加热，利用余热蒸干",
-        "溶液配制：计算→称量→溶解→转移→洗涤→定容→摇匀，使用容量瓶"
+        "药品取用：固体用药匙或镊子，液体用胶头滴管或倾倒，注意节约和安全。",
+        "物质加热：液体在试管中加热时液体不超过1/3，管口不对人；固体加热时试管口略向下倾斜。",
+        "过滤：一贴（滤纸紧贴漏斗）、二低（滤纸低于漏斗、液面低于滤纸）、三靠（烧杯靠玻璃棒、玻璃棒靠滤纸、漏斗靠烧杯）。",
+        "蒸发：用玻璃棒搅拌防止局部过热，接近蒸干时停止加热，利用余热蒸干。",
+        "溶液配制：计算→称量→溶解→转移→洗涤→定容→摇匀，使用容量瓶。"
+      ]},
+      { title: "有机化学基础", priority: "mid", items: [
+        "甲烷（CH₄）：最简单的有机物，正四面体结构，性质稳定，能发生燃烧反应（CH₄+2O₂点燃→CO₂+2H₂O），不与强酸、强碱反应。",
+        "乙烯（C₂H₄）：含碳碳双键（C=C），平面结构，性质活泼，能发生加成反应（如与Br₂、H₂加成），是重要的化工原料。",
+        "乙醇（C₂H₅OH）：含羟基（-OH），俗称酒精，能与水以任意比互溶，能发生燃烧反应、与金属钠反应，可作燃料、溶剂。",
+        "乙酸（CH₃COOH）：含羧基（-COOH），俗称醋酸，具有酸性（能使石蕊变红、与NaOH反应），能与乙醇发生酯化反应（生成乙酸乙酯）。",
+        "官能团：羟基（-OH）决定醇的性质，羧基（-COOH）决定酸的性质，碳碳双键（C=C）决定加成反应性质。"
       ]}
     ]
   },
   {
-    id: "biology", title: "生物", icon: "🧬", color: "#dc2626", tag: "生物", tagColor: "var(--tag-biology)",
+    id: "biology", title: "生物", icon: "🧬", color: "#ef4444", tag: "生物", tagColor: "var(--tag-biology)",
     topics: [
       { title: "细胞的结构", priority: "high", items: [
-        "细胞膜：主要由磷脂双分子层和蛋白质组成，具有选择透过性，控制物质进出细胞，进行细胞间信息交流",
-        "细胞质：细胞膜以内、细胞核以外的部分，包含各种细胞器和细胞质基质（新陈代谢的主要场所）",
-        "细胞核：由核膜、核仁、染色质组成，是遗传信息库，控制细胞的代谢和遗传",
-        "线粒体：双层膜结构，是有氧呼吸的主要场所，细胞的“动力车间”，产生ATP供能",
-        "叶绿体：双层膜结构，只存在于植物绿色细胞中，是光合作用的场所，“养料制造车间”",
-        "核糖体：无膜结构，由RNA和蛋白质组成，是蛋白质合成的场所"
+        "细胞膜：主要由磷脂双分子层和蛋白质组成，具有选择透过性，控制物质进出细胞，进行细胞间信息交流。",
+        "细胞质：细胞膜以内、细胞核以外的部分，包含各种细胞器和细胞质基质（新陈代谢的主要场所）。",
+        "细胞核：由核膜、核仁、染色质组成，是遗传信息库，控制细胞的代谢和遗传。",
+        "线粒体：双层膜结构，是有氧呼吸的主要场所，细胞的“动力车间”，产生ATP供能。",
+        "叶绿体：双层膜结构，只存在于植物绿色细胞中，是光合作用的场所，“养料制造车间”。",
+        "核糖体：无膜结构，由RNA和蛋白质组成，是蛋白质合成的场所。"
       ]},
       { title: "物质跨膜运输", priority: "high", items: [
-        "自由扩散：顺浓度梯度，不需要载体和能量，如O₂、CO₂、水的运输",
-        "协助扩散：顺浓度梯度，需要载体但不需要能量，如葡萄糖进入红细胞",
-        "主动运输：逆浓度梯度，需要载体和能量（ATP），如小肠吸收葡萄糖、氨基酸",
-        "胞吞和胞吐：大分子物质进出细胞的方式，需要能量，如分泌蛋白的分泌、吞噬细胞吞噬病菌"
+        "自由扩散：顺浓度梯度，不需要载体和能量，如O₂、CO₂、水的运输。",
+        "协助扩散：顺浓度梯度，需要载体但不需要能量，如葡萄糖进入红细胞。",
+        "主动运输：逆浓度梯度，需要载体和能量（ATP），如小肠吸收葡萄糖、氨基酸。",
+        "胞吞和胞吐：大分子物质进出细胞的方式，需要能量，如分泌蛋白的分泌、吞噬细胞吞噬病菌。"
       ]},
       { title: "酶与ATP", priority: "high", items: [
-        "酶的本质：绝大多数是蛋白质，少数是RNA（核酶）",
-        "酶的特性：高效性（比无机催化剂效率高10⁷-10¹³倍）、专一性（一种酶只催化一种或一类化学反应）、作用条件温和（适宜的温度和pH）",
-        "ATP：三磷酸腺苷，结构简式A-P~P~P，是细胞的直接能源物质，ATP与ADP相互转化",
-        "ATP的合成：光合作用的光反应、细胞呼吸（有氧呼吸和无氧呼吸第一阶段）"
+        "酶的本质：绝大多数是蛋白质，少数是RNA（核酶）。",
+        "酶的特性：高效性（比无机催化剂效率高10⁷-10¹³倍）、专一性（一种酶只催化一种或一类化学反应）、作用条件温和（适宜的温度和pH）。",
+        "ATP：三磷酸腺苷，结构简式A-P~P~P，是细胞的直接能源物质，ATP与ADP相互转化。",
+        "ATP的合成：光合作用的光反应、细胞呼吸（有氧呼吸和无氧呼吸第一阶段）。"
       ]},
       { title: "光合作用", priority: "high", items: [
-        "场所：叶绿体（类囊体薄膜和基质）",
-        "光反应：在类囊体薄膜上进行，需要光照，水的光解产生O₂和[H]，ATP的合成",
-        "暗反应：在叶绿体基质中进行，不需要光照，CO₂的固定（CO₂+C₅→2C₃）和C₃的还原（需要[H]和ATP）",
-        "总反应式：6CO₂+6H₂O→(光能、叶绿体)C₆H₁₂O₆+6O₂"
+        "场所：叶绿体（类囊体薄膜和基质）。",
+        "光反应：在类囊体薄膜上进行，需要光照，水的光解产生O₂和[H]，ATP的合成。",
+        "暗反应：在叶绿体基质中进行，不需要光照，CO₂的固定（CO₂+C₅→2C₃）和C₃的还原（需要[H]和ATP）。",
+        "总反应式：6CO₂+6H₂O→(光能、叶绿体)C₆H₁₂O₆+6O₂。"
       ]},
       { title: "细胞呼吸", priority: "high", items: [
-        "有氧呼吸：需要O₂，分为三个阶段：第一阶段在细胞质基质（葡萄糖→丙酮酸+[H]+少量ATP）；第二阶段在线粒体基质（丙酮酸+H₂O→CO₂+[H]+少量ATP）；第三阶段在线粒体内膜（[H]+O₂→H₂O+大量ATP）",
-        "有氧呼吸总反应式：C₆H₁₂O₆+6O₂+6H₂O→6CO₂+12H₂O+能量（约38个ATP）",
-        "无氧呼吸：不需要O₂，分为两个阶段：第一阶段与有氧呼吸第一阶段相同；第二阶段在细胞质基质（丙酮酸→酒精+CO₂或乳酸）"
+        "有氧呼吸：需要O₂，分为三个阶段：第一阶段在细胞质基质（葡萄糖→丙酮酸+[H]+少量ATP）；第二阶段在线粒体基质（丙酮酸+H₂O→CO₂+[H]+少量ATP）；第三阶段在线粒体内膜（[H]+O₂→H₂O+大量ATP）。",
+        "有氧呼吸总反应式：C₆H₁₂O₆+6O₂+6H₂O→6CO₂+12H₂O+能量（约38个ATP）。",
+        "无氧呼吸：不需要O₂，分为两个阶段：第一阶段与有氧呼吸第一阶段相同；第二阶段在细胞质基质（丙酮酸→酒精+CO₂或乳酸）。"
       ]},
       { title: "细胞增殖", priority: "high", items: [
-        "细胞周期：连续分裂的细胞从一次分裂完成时开始到下一次分裂完成时为止，包括间期（G₁期、S期、G₂期）和分裂期（前期、中期、后期、末期）",
-        "有丝分裂：体细胞增殖方式，特点是染色体复制一次，细胞分裂一次，产生两个与亲代细胞相同的子细胞"
+        "细胞周期：连续分裂的细胞从一次分裂完成时开始到下一次分裂完成时为止，包括间期（G₁期、S期、G₂期）和分裂期（前期、中期、后期、末期）。",
+        "有丝分裂：体细胞增殖方式，特点是染色体复制一次，细胞分裂一次，产生两个与亲代细胞相同的子细胞。"
       ]},
       { title: "遗传规律", priority: "high", items: [
-        "分离定律：在杂合子细胞中，位于一对同源染色体上的等位基因具有一定的独立性；在减数分裂形成配子时，等位基因会随同源染色体的分开而分离，分别进入两个配子中",
-        "分离定律实例：Aa自交→基因型AA:Aa:aa=1:2:1，表现型显性:隐性=3:1；Aa测交→Aa:aa=1:1",
-        "自由组合定律：位于非同源染色体上的非等位基因的分离或组合是互不干扰的；在减数分裂过程中，同源染色体上的等位基因彼此分离的同时，非同源染色体上的非等位基因自由组合",
-        "自由组合定律实例：AaBb自交→表现型比例9:3:3:1；AaBb测交→表现型比例1:1:1:1"
+        "分离定律：在杂合子细胞中，位于一对同源染色体上的等位基因具有一定的独立性；在减数分裂形成配子时，等位基因会随同源染色体的分开而分离，分别进入两个配子中。",
+        "分离定律实例：Aa自交→基因型AA:Aa:aa=1:2:1，表现型显性:隐性=3:1；Aa测交→Aa:aa=1:1。",
+        "自由组合定律：位于非同源染色体上的非等位基因的分离或组合是互不干扰的；在减数分裂过程中，同源染色体上的等位基因彼此分离的同时，非同源染色体上的非等位基因自由组合。",
+        "自由组合定律实例：AaBb自交→表现型比例9:3:3:1；AaBb测交→表现型比例1:1:1:1。"
       ]},
       { title: "内环境稳态", priority: "high", items: [
-        "内环境：细胞外液，包括血浆、组织液、淋巴，是细胞直接生活的环境",
-        "稳态：正常机体通过调节作用，使各个器官、系统协调活动，共同维持内环境的相对稳定状态",
-        "稳态调节机制：神经-体液-免疫调节网络",
-        "血糖调节：胰岛素（降血糖，促进葡萄糖进入细胞、合成糖原）、胰高血糖素（升血糖，促进肝糖原分解、非糖物质转化）",
-        "体温调节：寒冷时（皮肤血管收缩、骨骼肌战栗、甲状腺激素分泌增加）；炎热时（皮肤血管舒张、汗腺分泌增加）"
+        "内环境：细胞外液，包括血浆、组织液、淋巴，是细胞直接生活的环境。",
+        "稳态：正常机体通过调节作用，使各个器官、系统协调活动，共同维持内环境的相对稳定状态。",
+        "稳态调节机制：神经-体液-免疫调节网络。",
+        "血糖调节：胰岛素（降血糖，促进葡萄糖进入细胞、合成糖原）、胰高血糖素（升血糖，促进肝糖原分解、非糖物质转化）。",
+        "体温调节：寒冷时（皮肤血管收缩、骨骼肌战栗、甲状腺激素分泌增加）；炎热时（皮肤血管舒张、汗腺分泌增加）。"
+      ]},
+      { title: "基因表达", priority: "high", items: [
+        "DNA：脱氧核糖核酸，双螺旋结构，主要存在于细胞核中，是遗传物质，基本单位是脱氧核苷酸。",
+        "RNA：核糖核酸，单链结构，分为mRNA（信使RNA）、tRNA（转运RNA）、rRNA（核糖体RNA），参与蛋白质合成。",
+        "中心法则：DNA→RNA→蛋白质，遗传信息从DNA传递到RNA，再由RNA指导蛋白质合成。",
+        "转录：以DNA一条链为模板，在细胞核中合成mRNA，碱基配对A-U、T-A、C-G、G-C。",
+        "翻译：以mRNA为模板，在核糖体上，由tRNA转运氨基酸合成蛋白质。"
+      ]},
+      { title: "生态系统", priority: "mid", items: [
+        "生态系统组成：生物部分（生产者、消费者、分解者）和非生物部分（阳光、空气、水、土壤）。",
+        "食物链和食物网：食物链反映捕食关系，多条食物链交织形成食物网，是物质循环和能量流动的渠道。",
+        "能量流动：单向流动、逐级递减，传递效率约10%-20%。",
+        "物质循环：以碳循环为核心，碳在生物群落和无机环境间通过光合作用和呼吸作用循环。",
+        "生态系统稳定性：分为抵抗力稳定性和恢复力稳定性。"
       ]}
     ]
   },
   {
-    id: "english", title: "英语", icon: "🇬🇧", color: "#7c3aed", tag: "英语", tagColor: "var(--tag-english)",
+    id: "english", title: "英语", icon: "🇬🇧", color: "#8b5cf6", tag: "英语", tagColor: "var(--tag-english)",
     topics: [
       { title: "核心时态", priority: "high", items: [
-        "一般现在时：do/does，经常性、习惯性动作或客观真理，标志词：always, usually, often, every day",
-        "一般过去时：did，过去发生的动作，标志词：yesterday, last week, ...ago, in 2020",
-        "现在进行时：am/is/are doing，现在正在进行的动作，标志词：now, at the moment, look, listen",
-        "过去进行时：was/were doing，过去某一时刻或某一段时间正在进行的动作，标志词：at 8 o'clock last night, when",
-        "现在完成时：have/has done，过去动作对现在造成的影响或结果，标志词：already, yet, ever, never, since, for",
-        "一般将来时：will do/be going to do，将要发生的动作，标志词：tomorrow, next week, in the future"
+        "一般现在时：do/does，经常性、习惯性动作或客观真理，标志词：always, usually, often, every day。",
+        "一般过去时：did，过去发生的动作，标志词：yesterday, last week, ...ago, in 2020。",
+        "现在进行时：am/is/are doing，现在正在进行的动作，标志词：now, at the moment, look, listen。",
+        "过去进行时：was/were doing，过去某一时刻或某一段时间正在进行的动作，标志词：at 8 o'clock last night, when。",
+        "现在完成时：have/has done，过去动作对现在造成的影响或结果，标志词：already, yet, ever, never, since, for。",
+        "一般将来时：will do/be going to do，将要发生的动作，标志词：tomorrow, next week, in the future。"
       ]},
       { title: "定语从句", priority: "high", items: [
-        "先行词是人：who（作主语或宾语）、whom（作宾语）、that（作主语或宾语）、whose（作定语）",
-        "先行词是物：which（作主语或宾语）、that（作主语或宾语）、whose（作定语）",
-        "先行词是时间/地点/原因：when（作时间状语）、where（作地点状语）、why（作原因状语）",
-        "非限制性定语从句：用which引导，不用that，用逗号隔开，对先行词补充说明"
+        "先行词是人：who（作主语或宾语）、whom（作宾语）、that（作主语或宾语）、whose（作定语）。",
+        "先行词是物：which（作主语或宾语）、that（作主语或宾语）、whose（作定语）。",
+        "先行词是时间/地点/原因：when（作时间状语）、where（作地点状语）、why（作原因状语）。",
+        "非限制性定语从句：用which引导，不用that，用逗号隔开，对先行词补充说明。"
       ]},
       { title: "名词性从句", priority: "high", items: [
-        "主语从句：在句中作主语，常用that, whether, what, who引导",
-        "宾语从句：在句中作宾语，常用that（可省略）, whether/if, what引导",
-        "表语从句：在句中作表语，常用that, whether, what引导",
-        "同位语从句：解释说明前面的名词，常用that引导"
+        "主语从句：在句中作主语，常用that, whether, what, who引导。",
+        "宾语从句：在句中作宾语，常用that（可省略）, whether/if, what引导。",
+        "表语从句：在句中作表语，常用that, whether, what引导。",
+        "同位语从句：解释说明前面的名词，常用that引导。"
+      ]},
+      { title: "状语从句", priority: "high", items: [
+        "时间状语从句：when, while, as, since, until, as soon as, before, after。",
+        "条件状语从句：if, unless, as long as, provided that。",
+        "原因状语从句：because, since, as, for。",
+        "让步状语从句：though, although, even if, even though。",
+        "目的状语从句：so that, in order that。",
+        "结果状语从句：so...that, such...that。",
+        "地点状语从句：where, wherever。"
       ]},
       { title: "非谓语动词", priority: "high", items: [
-        "to do：表示目的、将来，常用搭配：want/plan/would like/wish to do",
-        "doing：表示主动、进行，常用搭配：enjoy/practice/finish/avoid doing，介词后用doing",
-        "done：表示被动、完成，过去分词作定语、状语、表语"
+        "to do：表示目的、将来，常用搭配：want/plan/would like/wish to do。",
+        "doing：表示主动、进行，常用搭配：enjoy/practice/finish/avoid doing，介词后用doing。",
+        "done：表示被动、完成，过去分词作定语、状语、表语。"
+      ]},
+      { title: "高频词汇与搭配", priority: "mid", items: [
+        "核心动词：do, make, take, have, go, get, come, go。",
+        "常用搭配：take care of, look forward to, be good at, pay attention to, make use of。",
+        "连接词：but, however, therefore, thus, moreover, furthermore, in addition, what's more。",
+        "形容词比较级最高级：good-better-best, bad-worse-worst, many/much-more-most。",
+        "词汇记忆方法：艾宾浩斯遗忘曲线，每天新学50词，复习旧词。"
       ]},
       { title: "阅读理解技巧", priority: "high", items: [
-        "先看题目，再读文章，划出题干关键词（人名、地名、时间、数字）",
-        "细节题：定位原文，找同义替换，注意原文表述与选项表述的差异",
-        "主旨题：看首尾段、段首句，避免以偏概全，不要选择过于细节的选项",
-        "推理题：忠于原文，不要过度推断，正确选项往往是原文的合理引申",
-        "词义猜测：看上下文解释、对比关系、同位语、构词法"
+        "先看题目，再读文章，划出题干关键词（人名、地名、时间、数字）。",
+        "细节题：定位原文，找同义替换，注意原文表述与选项表述的差异。",
+        "主旨题：看首尾段、段首句，避免以偏概全，不要选择过于细节的选项。",
+        "推理题：忠于原文，不要过度推断，正确选项往往是原文的合理引申。",
+        "词义猜测：看上下文解释、对比关系、同位语、构词法。"
       ]},
       { title: "完形填空技巧", priority: "high", items: [
-        "通读全文：了解文章大意，把握整体语境和作者意图",
-        "逻辑关系：通过转折（but, however）、因果（because, so）、递进（and, also）、并列（and, or）等连接词判断答案",
-        "固定搭配：积累常用短语和句型，如take care of, look forward to, be good at",
-        "语境为主：结合上下文选择最符合语境的词，不要孤立看空格"
+        "通读全文：了解文章大意，把握整体语境和作者意图。",
+        "逻辑关系：通过转折（but, however）、因果（because, so）、递进（and, also）、并列（and, or）等连接词判断答案。",
+        "固定搭配：积累常用短语和句型，如take care of, look forward to, be good at。",
+        "语境为主：结合上下文选择最符合语境的词，不要孤立看空格。"
       ]},
       { title: "书面表达模板", priority: "high", items: [
-        "建议信开头：I'm writing to give you some advice on...；建议：First of all, ... Besides, ... What's more, ...；结尾：I hope my advice will be helpful to you",
-        "邀请信：I'm writing to invite you to...；活动介绍：The activity will be held on... It will include...；结尾：Looking forward to your reply",
-        "感谢信：I'm writing to express my thanks for...；感谢原因：I really appreciate...；结尾：Thank you again",
-        "观点类作文：Nowadays, ...has become a hot topic. Some people believe that..., while others hold the opinion that...；个人观点：In my opinion, / As far as I'm concerned, / From my point of view, ..."
+        "建议信开头：I'm writing to give you some advice on...；建议：First of all, ... Besides, ... What's more, ...；结尾：I hope my advice will be helpful to you。",
+        "邀请信：I'm writing to invite you to...；活动介绍：The activity will be held on... It will include...；结尾：Looking forward to your reply。",
+        "感谢信：I'm writing to express my thanks for...；感谢原因：I really appreciate...；结尾：Thank you again。",
+        "观点类作文：Nowadays, ...has become a hot topic. Some people believe that..., while others hold the opinion that...；个人观点：In my opinion, / As far as I'm concerned, / From my point of view, ...。"
       ]}
     ]
   }
@@ -739,14 +745,6 @@ let ttsIndex = -1;
 let ttsTimer = null;
 
 let markedTopics = {};
-
-function updateCountdown() {
-  const now = new Date();
-  const examDate = new Date(2026, 5, 7);
-  const diff = examDate - now;
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  document.getElementById('countdownDays').textContent = days > 0 ? days : '0';
-}
 
 function loadMarkedTopics() {
   const saved = localStorage.getItem('markedTopics');
@@ -788,6 +786,7 @@ function render() {
 
     const header = document.createElement('div');
     header.className = 'subject-header';
+    header.style.background = `linear-gradient(135deg, ${subject.color}22, ${subject.color}11)`;
     header.style.borderLeft = `4px solid ${subject.color}`;
     header.innerHTML = `<span class="icon">${subject.icon}</span><span class="title">${subject.title}</span><span class="tag" style="background:${subject.tagColor}">${subject.tag}</span><span class="arrow">▶</span>`;
     header.onclick = () => toggleSubject(si);
@@ -827,9 +826,18 @@ function render() {
         const p = document.createElement('p');
         p.textContent = item;
         p.dataset.tts = item;
+        p.style.cursor = 'pointer';
+        p.onclick = () => startTTSFromItem(p);
         body.appendChild(p);
       });
       card.appendChild(body);
+      
+      // Make the whole card clickable to toggle
+      card.onclick = () => {
+        if (card.classList.contains('marked')) {
+          card.classList.remove('marked');
+        }
+      };
 
       content.appendChild(card);
     });
@@ -972,6 +980,33 @@ function collectTTS() {
   }
 }
 
+function startTTSFromItem(element) {
+  ttsStop();
+  const text = element.dataset.tts;
+  const index = ttsSentences.findIndex(s => s.element === element);
+  
+  if (index === -1) {
+    // 重新收集所有内容
+    collectTTS();
+    const newIndex = ttsSentences.findIndex(s => s.element === element);
+    if (newIndex !== -1) {
+      ttsIndex = newIndex;
+      ttsActive = true;
+      ttsPaused = false;
+      document.getElementById('ttsBar').classList.add('open');
+      document.querySelector('.header-btn:nth-child(2)').classList.add('active');
+      speakCurrent();
+    }
+  } else {
+    ttsIndex = index;
+    ttsActive = true;
+    ttsPaused = false;
+    document.getElementById('ttsBar').classList.add('open');
+    document.querySelector('.header-btn:nth-child(2)').classList.add('active');
+    speakCurrent();
+  }
+}
+
 function ttsToggle() {
   if (!ttsActive && ttsSentences.length === 0) {
     collectTTS();
@@ -999,7 +1034,7 @@ function ttsStop() {
   document.querySelector('.header-btn:nth-child(2)').classList.remove('active');
   document.getElementById('ttsPlayBtn').textContent = '▶';
   document.getElementById('ttsPlayBtn').classList.remove('active');
-  document.getElementById('ttsInfo').textContent = '已停止';
+  document.getElementById('ttsInfo').textContent = '选择一段文字开始朗读';
   clearHighlight();
   if (ttsTimer) { clearTimeout(ttsTimer); ttsTimer = null; }
 }
@@ -1023,7 +1058,9 @@ function ttsNext() {
   }
 }
 
-function ttsUpdateSpeed() {}
+function ttsUpdateSpeed() {
+  // Speed is read when speaking
+}
 
 function speakCurrent() {
   if (ttsIndex < 0 || ttsIndex >= ttsSentences.length) {
@@ -1084,8 +1121,6 @@ loadMarkedTopics();
 render();
 loadProgress();
 updateProgressBar();
-updateCountdown();
-setInterval(updateCountdown, 60000);
 </script>
 </body>
 </html>

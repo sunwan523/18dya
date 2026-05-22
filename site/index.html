@@ -232,6 +232,18 @@ body {
   display: flex; align-items: center; gap: 6px;
   font-size: 12px; color: var(--text-secondary);
 }
+.tts-start-subject {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.tts-start-subject select {
+  padding: 4px 8px; border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 12px;
+}
 .tts-speed select {
   padding: 2px 6px; border-radius: 4px;
   border: 1px solid var(--border);
@@ -285,6 +297,17 @@ body {
 <div class="main" id="mainContent"></div>
 <div class="tts-bar" id="ttsBar">
   <div class="tts-info" id="ttsInfo">选择一段文字开始朗读</div>
+  <div class="tts-start-subject">
+    <span>从以下学科开始：</span>
+    <select id="ttsStartSubject">
+      <option value="all">全部学科</option>
+      <option value="0">📐 数学</option>
+      <option value="1">⚛️ 物理</option>
+      <option value="2">🧪 化学</option>
+      <option value="3">🧬 生物</option>
+      <option value="4">🇬🇧 英语</option>
+    </select>
+  </div>
   <div class="tts-controls">
     <button class="tts-btn" onclick="ttsPrev()" title="上一句">⏮</button>
     <button class="tts-btn play" id="ttsPlayBtn" onclick="ttsToggle()" title="播放/暂停">▶</button>
@@ -1136,26 +1159,35 @@ function toggleTTS() {
   } else {
     bar.classList.add('open');
     btn.classList.add('active');
-    collectTTS();
+    const startSubject = document.getElementById('ttsStartSubject').value;
+    collectTTS(startSubject);
   }
 }
 
-function collectTTS() {
+function collectTTS(startSubject = 'all') {
   ttsSentences = [];
+  const subjectIndex = startSubject === 'all' ? -1 : parseInt(startSubject);
+  
   document.querySelectorAll('.topic-card').forEach(card => {
     if (!card.classList.contains('marked')) {
-      card.querySelectorAll('.topic-body p[data-tts]').forEach(p => {
-        ttsSentences.push({ element: p, text: p.dataset.tts });
-      });
+      const si = parseInt(card.id.split('-')[1]);
+      const shouldInclude = subjectIndex === -1 || si === subjectIndex;
+      
+      if (shouldInclude) {
+        card.querySelectorAll('.topic-body p[data-tts]').forEach(p => {
+          ttsSentences.push({ element: p, text: p.dataset.tts });
+        });
+      }
     }
   });
+  
   if (ttsSentences.length > 0) {
     ttsIndex = 0;
     ttsActive = true;
     ttsPaused = false;
     speakCurrent();
   } else {
-    document.getElementById('ttsInfo').textContent = '没有可朗读的内容（所有内容都已标记为已掌握）';
+    document.getElementById('ttsInfo').textContent = '该学科下没有可朗读的内容（所有内容都已标记为已掌握）';
   }
 }
 
@@ -1188,7 +1220,8 @@ function startTTSFromItem(element) {
 
 function ttsToggle() {
   if (!ttsActive && ttsSentences.length === 0) {
-    collectTTS();
+    const startSubject = document.getElementById('ttsStartSubject').value;
+    collectTTS(startSubject);
     return;
   }
   if (ttsPaused) {
